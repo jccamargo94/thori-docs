@@ -38,7 +38,7 @@ ${frontmatter}
 
 # ${t.titulo}
 
-\`${t.nombre}\` · sección ${t.manual} del manual de base de datos
+\`${t.nombre}\` · sección ${t.manual} del manual de base de datos · <BadgeEstado estado="${t.estado}" />
 
 ${t.descripcion.trim()}
 
