@@ -99,4 +99,19 @@ describe('archivos exigidos por cada bandera', () => {
       }
     }
   })
+
+  it('FCVARIABLE declara ecuacionesfc solo para el valor 3', () => {
+    const fc = banderas.find((b) => b.nombre === 'FCVARIABLE')
+    expect(fc.archivos).toContainEqual({
+      tabla: 'ecuacionesfc',
+      fuente: 'modelo',
+      valores: ['3'],
+    })
+  })
+
+  it('ZONAS declara las dos tablas que solo el modelo exige', () => {
+    const zonas = banderas.find((b) => b.nombre === 'ZONAS')
+    const soloModelo = zonas.archivos.filter((a) => a.fuente === 'modelo').map((a) => a.tabla)
+    expect(soloModelo.sort()).toEqual(['zonaespecial', 'zonarecurso'])
+  })
 })
