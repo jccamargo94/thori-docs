@@ -11,7 +11,12 @@ descripcion: >
   unidad con la que después se referencian todas las salidas de la
   simulación por lotes. Esta tabla no se llena a mano, la genera el programa
   de actualización del árbol de escenarios a partir de la configuración
-  vigente en escenariosbasica.
+  vigente en escenariosbasica. El esquema no es fijo: además de escenario y
+  probabilidad, el programa agrega una columna adicional por cada tabla de
+  escenariosbasica que tenga el campo activo en uno, con el número de
+  escenario de esa dimensión que corresponde a la combinación; por eso lo que
+  la persona ve en pantalla tiene más columnas que las dos que documenta esta
+  ficha.
 estado: sin-verificar
 manual: "14.2"
 campos:
@@ -22,7 +27,8 @@ campos:
     descripcion: >
       Número del escenario combinado simulado; identifica de forma única cada
       rama del árbol y con él se referencian todas las salidas de la
-      simulación.
+      simulación. El manual no declara un tipo explícito para este campo; se
+      documenta como integer por describirse como un número consecutivo.
     referencia: null
   - nombre: probabilidad
     tipo: double
@@ -31,5 +37,7 @@ campos:
     descripcion: >
       Probabilidad de ocurrencia de esta combinación de escenario. Solo se usa
       en la versión 5.0, para desactivar una rama del árbol que el usuario
-      quiera excluir de la simulación, colocando el valor en cero.
+      quiera excluir de la simulación, colocando el valor en cero. El manual
+      tampoco declara un tipo explícito para este campo; se documenta como
+      double por describirse como una probabilidad.
     referencia: null
