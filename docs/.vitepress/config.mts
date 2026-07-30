@@ -16,9 +16,11 @@ export default defineConfig({
       '/despacho-hidrotermico/': [
         {
           text: 'Empezar',
-          items: [
-            { text: 'Qué es', link: '/despacho-hidrotermico/' },
-          ],
+          items: [{ text: 'Qué es', link: '/despacho-hidrotermico/' }],
+        },
+        {
+          text: 'Datos',
+          items: [{ text: 'Modelo de datos', link: '/despacho-hidrotermico/datos/' }],
         },
       ],
     },
