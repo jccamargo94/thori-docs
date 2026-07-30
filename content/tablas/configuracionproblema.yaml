@@ -18,12 +18,14 @@ campos:
       e inactivar restricciones; no se puede cambiar.
     referencia: null
   - nombre: valor
-    tipo: integer
+    tipo: string
     unidad: null
     requerido: true
     descripcion: >
-      Valor de la bandera. La mayoría son 1 o 0 (activa o inactiva); algunas
-      admiten más valores, indicados en el catálogo de banderas.
+      Valor de la bandera. Casi todas usan 1 o 0 (activa o inactiva) y unas pocas
+      admiten más números, pero al menos una guarda texto: la que elige el solver.
+      Por eso el campo se documenta como texto, aunque su contenido habitual sea
+      numérico. El valor que acepta cada bandera está en el catálogo de banderas.
     referencia: null
   - nombre: descripcion
     tipo: string

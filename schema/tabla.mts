@@ -28,16 +28,25 @@ export const CampoSchema = z.object({
   referencia: z.string().regex(/^[a-z0-9]+\.[a-z0-9_]+$/).nullable(),
 })
 
-export const TablaSchema = z.object({
-  id: z.string().regex(/^[a-z0-9]+$/),
-  nombre: z.string().min(1),
-  familia: z.enum(FAMILIAS),
-  titulo: z.string().min(1),
-  descripcion: z.string().min(1),
-  estado: z.enum(ESTADOS),
-  manual: z.string().regex(/^\d+\.\d+$/),
-  campos: z.array(CampoSchema).min(1),
-})
+export const TablaSchema = z
+  .object({
+    id: z.string().regex(/^[a-z0-9]+$/),
+    nombre: z.string().min(1),
+    familia: z.enum(FAMILIAS),
+    titulo: z.string().min(1),
+    descripcion: z.string().min(1),
+    estado: z.enum(ESTADOS),
+    manual: z.string().regex(/^\d+\.\d+$/),
+    campos: z.array(CampoSchema),
+  })
+  // Dos secciones del manual (7.3 y 8.4) declaran una tabla y dicen que no está
+  // disponible, sin definir un solo campo. Inventar un campo placeholder para
+  // satisfacer el esquema sería fabricar documentación; la única forma honesta de
+  // representarlas es sin campos, y el estado tiene que decirlo.
+  .refine((t) => t.campos.length > 0 || t.estado === 'no-implementado', {
+    message: 'una tabla sin campos debe declarar estado: no-implementado',
+    path: ['campos'],
+  })
 
 export type Campo = z.infer<typeof CampoSchema>
 export type Tabla = z.infer<typeof TablaSchema>

@@ -57,3 +57,47 @@ describe('YAML de tablas', () => {
     }
   })
 })
+
+describe('el esquema rechaza datos inválidos', () => {
+  const valida = {
+    id: 'ejemplo',
+    nombre: 'Ejemplo',
+    familia: 'configuracion',
+    titulo: 'Tabla de ejemplo',
+    descripcion: 'Una tabla para probar el esquema.',
+    estado: 'sin-verificar',
+    manual: '1.1',
+    campos: [
+      {
+        nombre: 'campo',
+        tipo: 'string',
+        unidad: null,
+        requerido: true,
+        descripcion: 'Un campo.',
+        referencia: null,
+      },
+    ],
+  }
+
+  it('acepta el objeto de referencia', () => {
+    expect(TablaSchema.safeParse(valida).success).toBe(true)
+  })
+
+  it.each([
+    ['estado fuera del enum', { ...valida, estado: 'revisado' }],
+    ['tipo de campo fuera del enum', { ...valida, campos: [{ ...valida.campos[0], tipo: 'float' }] }],
+    ['familia fuera del enum', { ...valida, familia: 'inventada' }],
+    ['id con mayúsculas', { ...valida, id: 'Ejemplo' }],
+    ['sección de manual mal formada', { ...valida, manual: '1' }],
+    ['campo sin descripción', { ...valida, campos: [{ ...valida.campos[0], descripcion: '' }] }],
+    ['falta el campo requerido titulo', { ...valida, titulo: undefined }],
+    ['sin campos pero con estado sin-verificar', { ...valida, campos: [] }],
+  ])('rechaza: %s', (_caso, datos) => {
+    expect(TablaSchema.safeParse(datos).success).toBe(false)
+  })
+
+  it('acepta una tabla sin campos si declara no-implementado', () => {
+    const sinCampos = { ...valida, campos: [], estado: 'no-implementado' }
+    expect(TablaSchema.safeParse(sinCampos).success).toBe(true)
+  })
+})
