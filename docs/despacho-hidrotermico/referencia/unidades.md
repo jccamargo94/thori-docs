@@ -43,6 +43,10 @@ CERE de cada etapa. Aparece en
 [`recursotermicobasica`](../datos/recursotermicobasica), `recursotermicoperiodo`,
 `empresabasica` y [`periodobasica`](../datos/periodobasica).
 
+El `$` es la notación del manual, no un signo de moneda: son unidades internas de
+costo del catálogo del caso, no pesos ni dólares — ver la
+[advertencia sobre costos](#costos-una-advertencia) al final de esta página.
+
 ## Hm3
 
 Volumen de embalse. Mide el volumen mínimo, máximo y el vertimiento máximo del
@@ -55,6 +59,10 @@ embalse, y el volumen de cada punto de la curva de conversión. Aparece en
 Costo de combustible. Mide el costo del combustible, el costo de transporte y el
 costo de los contratos de combustible. Aparece en `combustiblebasica`,
 `combustibleperiodo`, `contratocombustiblebasica` y `contratocombustibleperiodo`.
+
+Igual que en `$/MWh`, el `$` es notación heredada del manual: son unidades internas
+de costo, no pesos ni dólares — ver la
+[advertencia sobre costos](#costos-una-advertencia) al final de esta página.
 
 ## MW/m3/s
 
