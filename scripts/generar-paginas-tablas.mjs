@@ -42,6 +42,7 @@ function paginaTabla(t) {
   const titulo = escapeHtml(t.titulo)
   const nombre = escapeHtml(t.nombre)
   const manual = escapeHtml(t.manual)
+  const estado = escapeHtml(t.estado)
   const frontmatter = stringify({ title: t.titulo, editLink: false }).trim()
   const campos = t.campos.length
     ? [
@@ -57,7 +58,7 @@ ${frontmatter}
 
 # ${titulo}
 
-\`${nombre}\` · sección ${manual} del manual de base de datos · <BadgeEstado estado="${t.estado}" />
+\`${nombre}\` · sección ${manual} del manual de base de datos · <BadgeEstado estado="${estado}" />
 
 ${textoLibre(t.descripcion)}
 
