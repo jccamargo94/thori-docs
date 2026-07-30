@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { readdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { basename } from 'node:path'
 import { parse, stringify } from 'yaml'
@@ -6,23 +6,42 @@ import { parse, stringify } from 'yaml'
 const contentDir = fileURLToPath(new URL('../content/tablas/', import.meta.url))
 const outDir = fileURLToPath(new URL('../docs/despacho-hidrotermico/datos/', import.meta.url))
 
-// Celda de tabla markdown: sin `|` ni saltos de línea literales.
+// VitePress corre markdown-it con HTML crudo habilitado: un `<` de una descripción se
+// interpretaría como etiqueta. Todo texto que venga del YAML y no esté entre backticks
+// (el code span de markdown-it ya escapa solo) pasa por acá antes de ir a la página.
+// El orden importa: `&` primero, o las entidades que generamos acá se escaparían de nuevo.
+function escapeHtml(texto) {
+  return String(texto).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
+// Texto libre (párrafo de descripción de tabla): escapado, conserva sus saltos de línea.
+function textoLibre(texto) {
+  return escapeHtml(texto).trim()
+}
+
+// Celda de tabla markdown: escapada, sin `|` ni saltos de línea literales.
 function celda(texto) {
-  return String(texto).replace(/\|/g, '\\|').replace(/\s*\n\s*/g, ' ').trim()
+  return escapeHtml(texto).replace(/\|/g, '\\|').replace(/\s*\n\s*/g, ' ').trim()
 }
 
 function filaCampo(campo) {
-  const unidad = campo.unidad ?? '—'
+  const nombre = escapeHtml(campo.nombre)
+  const tipo = escapeHtml(campo.tipo)
+  const unidad = campo.unidad != null ? escapeHtml(campo.unidad) : '—'
   const obligatorio = campo.requerido ? 'Sí' : 'No'
   let descripcion = celda(campo.descripcion)
   if (campo.referencia) {
+    const referencia = escapeHtml(campo.referencia)
     const destino = campo.referencia.split('.')[0]
-    descripcion += `<br>Referencia a [\`${campo.referencia}\`](./${destino}.md)`
+    descripcion += `<br>Referencia a [\`${referencia}\`](./${destino}.md)`
   }
-  return `| \`${campo.nombre}\` | ${campo.tipo} | ${unidad} | ${obligatorio} | ${descripcion} |`
+  return `| \`${nombre}\` | ${tipo} | ${unidad} | ${obligatorio} | ${descripcion} |`
 }
 
 function paginaTabla(t) {
+  const titulo = escapeHtml(t.titulo)
+  const nombre = escapeHtml(t.nombre)
+  const manual = escapeHtml(t.manual)
   const frontmatter = stringify({ title: t.titulo, editLink: false }).trim()
   const campos = t.campos.length
     ? [
@@ -36,16 +55,24 @@ function paginaTabla(t) {
 ${frontmatter}
 ---
 
-# ${t.titulo}
+# ${titulo}
 
-\`${t.nombre}\` · sección ${t.manual} del manual de base de datos · <BadgeEstado estado="${t.estado}" />
+\`${nombre}\` · sección ${manual} del manual de base de datos · <BadgeEstado estado="${t.estado}" />
 
-${t.descripcion.trim()}
+${textoLibre(t.descripcion)}
 
 ## Campos
 
 ${campos}
 `
+}
+
+// Limpia huérfanos: un .md generado de una tabla que ya no tiene YAML se queda navegable
+// y buscable si no lo borramos antes de regenerar. index.md es manual, nunca se toca.
+for (const archivo of readdirSync(outDir)) {
+  if (archivo.endsWith('.md') && archivo !== 'index.md') {
+    unlinkSync(outDir + archivo)
+  }
 }
 
 for (const archivo of readdirSync(contentDir).filter((f) => f.endsWith('.yaml'))) {
