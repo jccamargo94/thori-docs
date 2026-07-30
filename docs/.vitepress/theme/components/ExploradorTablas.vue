@@ -43,7 +43,7 @@ const resultados = computed(() => {
       </select>
     </div>
 
-    <p class="conteo">{{ resultados.length }} de {{ tablas.length }} tablas</p>
+    <p class="conteo" aria-live="polite">{{ resultados.length }} de {{ tablas.length }} tablas</p>
 
     <details v-for="r in resultados" :key="r.tabla.id" :open="r.campos.length > 0">
       <summary>

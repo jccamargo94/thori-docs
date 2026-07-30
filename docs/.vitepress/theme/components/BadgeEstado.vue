@@ -26,7 +26,7 @@ const info = computed(() => TEXTOS[props.estado] ?? TEXTOS['sin-verificar'])
 </script>
 
 <template>
-  <span class="badge" :class="`badge--${estado}`" :title="info.ayuda">{{ info.etiqueta }}</span>
+  <span class="badge" :class="`badge--${estado}`" :title="info.ayuda" tabindex="0">{{ info.etiqueta }}</span>
 </template>
 
 <style scoped>
