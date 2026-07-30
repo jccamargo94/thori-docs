@@ -85,24 +85,24 @@ campos:
   - nombre: etapaentrada
     tipo: integer
     unidad: null
-    requerido: false
+    requerido: true
     descripcion: >
-      Etapa a partir de la cual entra en operación el recurso, cuando este es
-      futuro; su fecha de entrada se define en la tabla fechaentrada.
+      Valor indicativo de que el recurso es futuro; cuando aplica, la fecha
+      de entrada se define en la tabla fechaentrada.
     referencia: null
   - nombre: subarea
     tipo: string
     unidad: null
     requerido: true
-    descripcion: Subárea operativa a la que pertenece el recurso.
+    descripcion: Subárea a la que pertenece la empresa dueña del recurso.
     referencia: null
   - nombre: combustible
     tipo: string
     unidad: null
     requerido: true
     descripcion: >
-      Tipo de combustible asociado al recurso, en texto libre; es distinto
-      del campo tipo, que usa los códigos abreviados TL, TG y TC.
+      Tipo de combustible asociado al recurso; distinto del campo tipo, que
+      usa los códigos abreviados TL, TG y TC.
     referencia: null
   - nombre: modelocournot
     tipo: integer
