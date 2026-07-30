@@ -7,6 +7,19 @@ import { REDIRECCIONES } from './redirecciones.mjs'
 const contentDir = fileURLToPath(new URL('../content/tablas/', import.meta.url))
 const outDir = fileURLToPath(new URL('../docs/despacho-hidrotermico/datos/', import.meta.url))
 
+const banderasFile = fileURLToPath(new URL('../content/banderas.yaml', import.meta.url))
+const banderas = parse(readFileSync(banderasFile, 'utf-8'))
+
+// Relación inversa del mapeo bandera→archivos: se calcula acá para que la página de una
+// tabla diga qué banderas la reclaman sin que nadie mantenga esa lista a mano.
+const banderasPorTabla = new Map()
+for (const b of banderas) {
+  for (const a of b.archivos ?? []) {
+    if (!banderasPorTabla.has(a.tabla)) banderasPorTabla.set(a.tabla, [])
+    banderasPorTabla.get(a.tabla).push({ nombre: b.nombre, valores: a.valores })
+  }
+}
+
 function paginaRedirect(idViejo, idNuevo) {
   const destino = `/thori-docs/despacho-hidrotermico/datos/${idNuevo}`
   const frontmatter = stringify({
@@ -73,6 +86,22 @@ function paginaTabla(t) {
       ].join('\n')
     : '_Esta tabla no tiene campos: el manual la declara pero indica que no está disponible en la versión del modelo que documenta el manual._'
 
+  const exigidaPor = banderasPorTabla.get(t.id) ?? []
+  const seccionBanderas = exigidaPor.length
+    ? `
+## Cuándo hace falta
+
+Este archivo se vuelve obligatorio al activar ${exigidaPor
+        .map((b) => {
+          const enlace = `[\`${escapeHtml(b.nombre)}\`](../referencia/banderas.md#${b.nombre.toLowerCase()})`
+          if (!b.valores?.length) return enlace
+          const vs = b.valores.map((v) => `\`${escapeHtml(v)}\``).join(' o ')
+          return `${enlace} con valor ${vs}`
+        })
+        .join(', ')}.
+`
+    : ''
+
   return `---
 ${frontmatter}
 ---
@@ -86,7 +115,7 @@ ${textoLibre(t.descripcion)}
 ## Campos
 
 ${campos}
-`
+${seccionBanderas}`
 }
 
 // Limpia huérfanos: un .md generado de una tabla que ya no tiene YAML se queda navegable

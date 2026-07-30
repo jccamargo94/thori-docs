@@ -27,6 +27,35 @@ function filaValor(v) {
   return `| \`${escapeHtml(v.valor)}\` | ${celda(v.significado)} |`
 }
 
+function listaArchivos(archivos) {
+  // La ausencia de sección es indistinguible de "nadie lo verificó". Como la auditoría
+  // recorrió las 29 banderas, el caso vacío se dice con todas las letras.
+  if (!archivos?.length) {
+    return `
+No obliga a subir ningún archivo adicional: trabaja sobre datos que ya vienen en las
+tablas obligatorias de todo caso.
+`
+  }
+  const filas = archivos.map((a) => {
+    const enlace = `[\`${escapeHtml(a.tabla)}\`](../datos/${escapeHtml(a.tabla)}.md)`
+    const cuando = a.valores?.length
+      ? `Solo con valor ${a.valores.map((v) => `\`${escapeHtml(v)}\``).join(' o ')}. `
+      : ''
+    const nota =
+      a.fuente === 'modelo'
+        ? 'La necesita el modelo. El validador de insumos todavía no la pide: un caso sin ella pasa la validación y falla al resolver.'
+        : 'La exige el validador de insumos al crear la base de datos.'
+    return `| ${enlace} | ${cuando}${nota} |`
+  })
+  return `
+**Archivos que obliga a subir**
+
+| Tabla | Cuándo se reclama |
+|---|---|
+${filas.join('\n')}
+`
+}
+
 function seccionBandera(b) {
   const nombre = escapeHtml(b.nombre)
   const estado = escapeHtml(b.estado)
@@ -41,7 +70,7 @@ function seccionBandera(b) {
 ${textoLibre(b.descripcion)}
 
 ${valores}
-`
+${listaArchivos(b.archivos)}`
 }
 
 // El archivo salió del índice de git al volverse generado (ver .gitignore), así que
