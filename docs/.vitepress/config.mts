@@ -41,6 +41,7 @@ export default withMermaid({
           items: [
             { text: 'Glosario', link: '/despacho-hidrotermico/referencia/glosario' },
             { text: 'Unidades', link: '/despacho-hidrotermico/referencia/unidades' },
+            { text: 'Estados de verificación', link: '/despacho-hidrotermico/referencia/estados' },
             { text: 'Banderas de configuración', link: '/despacho-hidrotermico/referencia/banderas' },
           ],
         },

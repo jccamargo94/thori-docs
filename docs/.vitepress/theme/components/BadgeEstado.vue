@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { withBase } from 'vitepress'
 
 const props = defineProps<{ estado: string }>()
 
@@ -26,7 +27,13 @@ const info = computed(() => TEXTOS[props.estado] ?? TEXTOS['sin-verificar'])
 </script>
 
 <template>
-  <span class="badge" :class="`badge--${estado}`" :title="info.ayuda" tabindex="0">{{ info.etiqueta }}</span>
+  <a
+    class="badge"
+    :class="`badge--${estado}`"
+    :href="withBase('/despacho-hidrotermico/referencia/estados')"
+    :title="info.ayuda"
+    >{{ info.etiqueta }}</a
+  >
 </template>
 
 <style scoped>
@@ -37,7 +44,7 @@ const info = computed(() => TEXTOS[props.estado] ?? TEXTOS['sin-verificar'])
   font-size: 0.75rem;
   font-weight: 600;
   border: 1px solid;
-  cursor: help;
+  text-decoration: none;
 }
 .badge--vigente {
   color: var(--vp-c-green-1);

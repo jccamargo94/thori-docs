@@ -4,7 +4,9 @@ title: Modelo de datos
 
 <script setup>
 import { data as tablas } from '../../.vitepress/data/tablas.data.mts'
+import { ETIQUETAS_FAMILIA } from '../../../schema/tabla.mts'
 import { computed } from 'vue'
+import { withBase } from 'vitepress'
 
 const familias = computed(() => {
   const mapa = new Map()
@@ -24,10 +26,10 @@ familia; cada tabla documenta sus campos, su tipo y su unidad.
 <ExploradorTablas />
 
 <div v-for="[familia, items] in familias" :key="familia">
-  <h2>{{ familia }}</h2>
+  <h2>{{ ETIQUETAS_FAMILIA[familia] ?? familia }}</h2>
   <ul>
     <li v-for="t in items" :key="t.id">
-      <a :href="`/thori-docs/despacho-hidrotermico/datos/${t.id}`">{{ t.titulo }}</a>
+      <a :href="withBase(`/despacho-hidrotermico/datos/${t.id}`)">{{ t.titulo }}</a>
       — <code>{{ t.nombre }}</code>
     </li>
   </ul>

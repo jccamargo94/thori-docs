@@ -2,11 +2,15 @@
 import { computed, ref } from 'vue'
 import { withBase } from 'vitepress'
 import { data as tablas } from '../../data/tablas.data.mts'
+import { ETIQUETAS_FAMILIA } from '../../../../schema/tabla.mts'
 
 const consulta = ref('')
 const familia = ref('todas')
 
 const familias = computed(() => ['todas', ...new Set(tablas.map((t) => t.familia))])
+
+const etiquetaFamilia = (f: string) =>
+  f === 'todas' ? 'Todas' : (ETIQUETAS_FAMILIA[f as keyof typeof ETIQUETAS_FAMILIA] ?? f)
 
 const normalizar = (s: string) =>
   s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '')
@@ -39,7 +43,7 @@ const resultados = computed(() => {
         aria-label="Buscar tabla o campo"
       />
       <select v-model="familia" aria-label="Filtrar por familia">
-        <option v-for="f in familias" :key="f" :value="f">{{ f }}</option>
+        <option v-for="f in familias" :key="f" :value="f">{{ etiquetaFamilia(f) }}</option>
       </select>
     </div>
 
@@ -49,7 +53,7 @@ const resultados = computed(() => {
       <summary>
         <strong>{{ r.tabla.titulo }}</strong>
         <code>{{ r.tabla.nombre }}</code>
-        <span class="familia">{{ r.tabla.familia }}</span>
+        <span class="familia">{{ etiquetaFamilia(r.tabla.familia) }}</span>
       </summary>
       <p>{{ r.tabla.descripcion }}</p>
       <ul v-if="r.campos.length">

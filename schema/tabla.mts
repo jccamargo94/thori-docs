@@ -17,6 +17,26 @@ export const FAMILIAS = [
   'escenarios',
 ] as const
 
+// Fuente única de los nombres legibles de familia: cualquier lugar que muestre una
+// familia (el índice del modelo de datos, el explorador) consume este mapa en vez
+// de imprimir el id crudo (`red-hidraulica`, etc.).
+export const ETIQUETAS_FAMILIA: Record<(typeof FAMILIAS)[number], string> = {
+  configuracion: 'Configuración',
+  areas: 'Áreas operativas',
+  bloques: 'Bloques',
+  combustibles: 'Combustibles',
+  'contratos-combustible': 'Contratos de combustible',
+  periodos: 'Periodos',
+  empresas: 'Empresas',
+  'recursos-hidraulicos': 'Recursos hidráulicos',
+  'recursos-termicos': 'Recursos térmicos',
+  fechas: 'Fechas de entrada',
+  'red-hidraulica': 'Red hidráulica',
+  zonas: 'Zonas de seguridad',
+  'recursos-no-convencionales': 'Recursos no convencionales',
+  escenarios: 'Escenarios',
+}
+
 export const ESTADOS = ['vigente', 'difiere-v6', 'no-implementado', 'sin-verificar'] as const
 
 export const CampoSchema = z.object({
