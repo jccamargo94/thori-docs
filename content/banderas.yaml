@@ -1,0 +1,444 @@
+- nombre: AREAS
+  descripcion: >
+    Activa el modelo de áreas operativas: el balance de demanda se resuelve por área
+    y se habilitan los límites de importación y exportación entre ellas.
+  familia: areas
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: No se modelan áreas operativas.
+    - valor: "1"
+      significado: Se modelan áreas operativas con sus intercambios.
+
+- nombre: CAR
+  descripcion: >
+    Activa la restricción de curva de aversión al riesgo: obliga a que el volumen útil
+    del sistema se mantenga en cada etapa por encima del valor definido en la curva.
+  familia: hidraulica
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: No se exige la curva de aversión al riesgo.
+    - valor: "1"
+      significado: Se exige la curva de aversión al riesgo en todas las etapas.
+
+- nombre: CONTRATOSBILATERALES
+  descripcion: >
+    Define si se exige el cumplimiento de los contratos bilaterales de energía cuando
+    se resuelve el problema de minimización de costos. En el problema de maximización
+    de utilidades esta restricción siempre se impone, sin importar el valor de la
+    bandera, así que su efecto solo se nota comparando corridas en modo minimización.
+  familia: contratos
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: >
+        En minimización de costos no se exige el cumplimiento de los contratos
+        bilaterales.
+    - valor: "1"
+      significado: >
+        En minimización de costos se exige el cumplimiento de los contratos
+        bilaterales configurados por empresa.
+
+- nombre: CONTRATOSCOMBUSTIBLE
+  descripcion: >
+    Define si el consumo de combustible de los recursos térmicos queda limitado por
+    los contratos de combustible vigentes en cada etapa, en lugar de solo por la
+    capacidad de los centros de abastecimiento.
+  familia: combustible
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: No se aplica la restricción de contratos de combustible.
+    - valor: "1"
+      significado: >
+        Se aplica la restricción de contratos de combustible: el recurso solo puede
+        consumir combustible de un contrato durante su vigencia.
+
+- nombre: COSTO1
+  descripcion: >
+    Solo tiene efecto en el problema de maximización de utilidades. Suma en la función
+    objetivo, con signo negativo, el costo variable de generación de los recursos que
+    no pertenecen a la empresa cuyas utilidades se están maximizando, penalizando así
+    que esos recursos generen en su lugar.
+  familia: costos
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: >
+        No se incluye el costo variable de los recursos de otras empresas en la
+        función objetivo.
+    - valor: "1"
+      significado: >
+        Se incluye, con signo negativo, el costo variable de los recursos de otras
+        empresas en la función objetivo.
+
+- nombre: COSTO2
+  descripcion: >
+    Solo tiene efecto en el problema de maximización de utilidades. Suma en la función
+    objetivo, con signo negativo, el costo de combustible de los recursos que no
+    pertenecen a la empresa cuyas utilidades se están maximizando.
+  familia: costos
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: >
+        No se incluye el costo de combustible de los recursos de otras empresas en la
+        función objetivo.
+    - valor: "1"
+      significado: >
+        Se incluye, con signo negativo, el costo de combustible de los recursos de
+        otras empresas en la función objetivo.
+
+- nombre: COSTO3
+  descripcion: >
+    Solo tiene efecto en el problema de maximización de utilidades. Suma en la función
+    objetivo, con signo negativo, el costo de los contratos de combustible de los
+    recursos que no pertenecen a la empresa cuyas utilidades se están maximizando.
+  familia: costos
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: >
+        No se incluye el costo de contrato de combustible de los recursos de otras
+        empresas en la función objetivo.
+    - valor: "1"
+      significado: >
+        Se incluye, con signo negativo, el costo de contrato de combustible de los
+        recursos de otras empresas en la función objetivo.
+
+- nombre: DEMANDA
+  descripcion: >
+    Define de dónde sale la demanda que debe atenderse. Es una de las banderas más
+    determinantes del resultado, porque cambia la serie de entrada del balance.
+  familia: demanda
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: No se modela la ecuación de demanda. Útil solo para el modelo de mercado.
+    - valor: "1"
+      significado: Se toma la demanda en MW de la tabla de periodos.
+    - valor: "2"
+      significado: Se toma la demanda en bloques de energía provista por un programa externo.
+
+- nombre: DH
+  descripcion: >
+    Controla si el despacho hidráulico queda ligado al agua disponible en los
+    embalses. Sin esta restricción, un recurso hidráulico puede aparecer despachado a
+    su capacidad máxima aunque el embalse asociado esté vacío, lo cual distorsiona el
+    resultado.
+  familia: hidraulica
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: >
+        No se imponen las restricciones de producción hidráulica: los recursos pueden
+        despacharse a su máximo sin importar el volumen del embalse.
+    - valor: "1"
+      significado: >
+        Se activan todas las restricciones de producción hidráulica ligadas al
+        balance de agua de los embalses.
+
+- nombre: ESCENARIO
+  descripcion: >
+    Selecciona cuál de los escenarios o casos de información configurados en las
+    tablas de entrada se usa para la ejecución. Cambiar su valor cambia todos los
+    datos de entrada que dependen del campo escenario, no una restricción puntual.
+  familia: ejecucion
+  estado: sin-verificar
+  valores:
+    - valor: n
+      significado: >
+        Ejecuta el modelo con el escenario número n: todas las tablas con campo
+        escenario aportan las filas marcadas con ese número.
+
+- nombre: FCVARIABLE
+  descripcion: >
+    Define cómo se calcula el factor de conversión (caudal a energía) de las plantas
+    hidráulicas. Cambiar de un factor promedio fijo a un modelo variable según el nivel
+    del embalse hace más preciso el despacho, a costa de un problema más pesado de
+    resolver.
+  familia: hidraulica
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: Se usa un factor de conversión promedio, fijo, por planta.
+    - valor: "1"
+      significado: >
+        Se usa una tabla de factores de conversión variables según puntos del
+        embalse. Este modelo agrega variables binarias, lo que aumenta el tiempo de
+        ejecución.
+    - valor: "2"
+      significado: >
+        Se usa una tabla de potencia máxima contra nivel de embalse (acuerdo CNO 833).
+    - valor: "3"
+      significado: >
+        Se usa una ecuación lineal del factor de conversión en función del nivel del
+        embalse.
+
+- nombre: FTVARIABLE
+  descripcion: >
+    Define cómo se calcula el factor de consumo de combustible (heat rate) de las
+    plantas térmicas. Pasar de un factor promedio fijo a una tabla variable por nivel
+    de potencia afina el consumo de combustible modelado, a costa de un problema más
+    pesado de resolver.
+  familia: termica
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: Se usa un factor de consumo de combustible promedio, fijo, por planta.
+    - valor: "1"
+      significado: >
+        Se usa una tabla de factores de consumo variables según el nivel de potencia
+        despachado. Este modelo agrega variables binarias, lo que aumenta el tiempo de
+        ejecución.
+
+- nombre: GAS
+  descripcion: >
+    Controla si el despacho térmico queda ligado a la disponibilidad de combustible.
+    Sin esta restricción, un recurso térmico puede aparecer despachado a su capacidad
+    máxima aunque no haya combustible disponible para producir esa energía.
+  familia: termica
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: >
+        No se imponen las restricciones de producción térmica: los recursos pueden
+        despacharse a su máximo sin importar la disponibilidad de combustible.
+    - valor: "1"
+      significado: >
+        Se activan las restricciones de producción térmica según la disponibilidad de
+        combustible.
+
+- nombre: GENERACIONMAXIMA
+  descripcion: >
+    Define si la generación total de una empresa queda topada por el valor de su
+    contrato en la tabla básica de empresas, además de por la capacidad de sus
+    propios recursos.
+  familia: contratos
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: >
+        La generación de la empresa no se limita por el valor de su contrato, solo
+        por la capacidad de sus recursos.
+    - valor: "1"
+      significado: >
+        La generación máxima de la empresa queda limitada al valor del contrato
+        configurado en la tabla básica de empresas.
+
+- nombre: GENERARLP
+  descripcion: >
+    Es una opción de depuración: no cambia el resultado numérico de la ejecución,
+    pero deja un archivo con el planteamiento matemático completo del problema
+    (variables, restricciones y función objetivo) para inspeccionarlo o depurarlo.
+  familia: ejecucion
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: No se genera el archivo con el planteamiento matemático del problema.
+    - valor: "1"
+      significado: >
+        Se genera un archivo LP con el planteamiento matemático completo del
+        problema resuelto.
+
+- nombre: ITERATIVO
+  descripcion: >
+    Cambia el modo de ejecución: en lugar de resolver una sola corrida, encadena
+    múltiples corridas siguiendo el árbol de escenarios configurado, de modo que el
+    resultado final es un conjunto de corridas relacionadas y no una sola.
+  familia: ejecucion
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: Se ejecuta una sola corrida con el escenario indicado.
+    - valor: "1"
+      significado: >
+        Se ejecuta en modo iterativo, recorriendo el árbol de escenarios configurado.
+
+- nombre: MARGINALES
+  descripcion: >
+    Agrega una restricción especial que obliga a que la generación de todos los
+    bloques de una misma etapa quede equilibrada entre sí, condición necesaria para
+    que el costo marginal calculado por bloque sea consistente entre bloques.
+  familia: costos
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: No se impone el equilibrio de generación entre bloques de una etapa.
+    - valor: "1"
+      significado: >
+        Se impone el equilibrio de generación entre bloques de una etapa, para el
+        cálculo correcto de los costos marginales.
+
+- nombre: MODELO
+  descripcion: >
+    Define qué problema de optimización se resuelve. No es un ajuste menor: cambiar
+    de minimización a maximización cambia la función objetivo completa y, con ella,
+    qué recursos conviene despachar.
+  familia: ejecucion
+  estado: sin-verificar
+  valores:
+    - valor: "1"
+      significado: Se resuelve el problema de minimización de costos del sistema.
+    - valor: "2"
+      significado: Se resuelve el problema de maximización de utilidades de una empresa.
+
+- nombre: OPTIMIZADOR
+  descripcion: >
+    Selecciona el motor de optimización (solver) que resuelve el problema matemático.
+    No cambia el modelo planteado, pero sí puede cambiar el tiempo de solución y la
+    capacidad de manejar las variables binarias que activan otras banderas.
+  familia: ejecucion
+  estado: sin-verificar
+  valores:
+    - valor: cbc
+      significado: Usa el solver de código abierto CBC (Coin-OR).
+    - valor: cplex
+      significado: Usa el solver comercial CPLEX de IBM.
+    - valor: mosek
+      significado: Usa el solver comercial MOSEK.
+    - valor: glpk
+      significado: Usa el solver de código abierto GLPK (GNU Linear Programming Kit).
+
+- nombre: PENALIZACION_VMN
+  descripcion: >
+    Cambia el mínimo de volumen útil de un embalse de restricción estricta a un
+    término penalizado en la función objetivo, permitiendo que el modelo encuentre
+    solución aun cuando no sea posible respetar ese mínimo, a costa de un castigo en
+    el costo total.
+  familia: hidraulica
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: El mínimo de volumen útil del embalse se exige como restricción estricta.
+    - valor: "1"
+      significado: >
+        El incumplimiento del mínimo de volumen útil se penaliza en la función
+        objetivo en lugar de prohibirse.
+
+- nombre: PENALIZACION_VMX
+  descripcion: >
+    Cambia el máximo de volumen útil de un embalse de restricción estricta a un
+    término penalizado en la función objetivo, permitiendo que el modelo encuentre
+    solución aun cuando no sea posible respetar ese máximo, a costa de un castigo en
+    el costo total.
+  familia: hidraulica
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: El máximo de volumen útil del embalse se exige como restricción estricta.
+    - valor: "1"
+      significado: >
+        El incumplimiento del máximo de volumen útil se penaliza en la función
+        objetivo en lugar de prohibirse.
+
+- nombre: PENALIZACIONV
+  descripcion: >
+    Agrega en la función objetivo un castigo por cada unidad de agua vertida, de
+    modo que el modelo solo vierte cuando no tiene otra alternativa, en lugar de
+    tratar el vertimiento como una salida sin costo.
+  familia: hidraulica
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: Los vertimientos no se penalizan en la función objetivo.
+    - valor: "1"
+      significado: Los vertimientos se penalizan en la función objetivo.
+
+- nombre: PERFILPERIODICO
+  descripcion: >
+    Decide si las tablas con información variable por etapa se tienen en cuenta o
+    se ignoran por completo. Si se ignoran, el modelo usa únicamente los valores
+    básicos, así existan filas periódicas cargadas para esa entidad.
+  familia: ejecucion
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: Se ignoran los valores de las tablas periódicas, aunque existan.
+    - valor: "1"
+      significado: Se toman en cuenta los valores de todas las tablas periódicas.
+
+- nombre: RGON
+  descripcion: >
+    Activa el modelado de unidades individuales en el despacho energético, en lugar
+    de tratar cada recurso como un bloque continuo de generación.
+  familia: termica
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: No se modelan unidades individuales en el despacho energético.
+    - valor: "1"
+      significado: Se modelan unidades individuales en el despacho energético.
+
+- nombre: TASADESCUENTO
+  descripcion: >
+    Define si los costos variables de cada etapa se traen a valor presente neto
+    respecto a la primera etapa, usando la tasa de descuento de la tabla básica de
+    periodos. Cambia cómo se comparan económicamente etapas lejanas contra etapas
+    cercanas en la función objetivo.
+  familia: costos
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: Los costos variables no se traen a valor presente neto.
+    - valor: "1"
+      significado: >
+        Los costos variables de cada etapa se traen a valor presente neto de la
+        primera etapa, según la tasa de descuento configurada.
+
+- nombre: UTILVARIABLE
+  descripcion: >
+    Define de dónde sale el volumen útil de cada embalse. Actuar en conjunto o no
+    con PERFILPERIODICO no importa: esta bandera es independiente y siempre toma
+    los valores de mínimo y máximo periódico cuando está activa.
+  familia: hidraulica
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: El volumen útil del embalse se calcula con los valores básicos de mínimo y máximo.
+    - valor: "1"
+      significado: >
+        El volumen útil del embalse se calcula con los valores de mínimo y máximo
+        periódico de cada etapa.
+
+- nombre: VERTIMIENTOS
+  descripcion: >
+    Restringe cuándo un embalse puede verter agua. Con la restricción activa, un
+    embalse solo vierte si está lleno, evitando vertimientos que en la realidad
+    serían evitables reduciendo antes la generación o el turbinamiento.
+  familia: hidraulica
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: El embalse puede verter agua sin importar su nivel de volumen.
+    - valor: "1"
+      significado: El embalse solo puede verter agua cuando se encuentra en el 100% de su volumen.
+
+- nombre: VOLUMENFINAL
+  descripcion: >
+    Fija el volumen del embalse en la última etapa del horizonte de optimización a
+    un valor de entrada, en lugar de dejarlo libre para que el modelo decida. Cambia
+    qué tan agresivamente se turbina el agua hacia el final del horizonte.
+  familia: hidraulica
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: El volumen final del embalse queda libre; el modelo lo decide.
+    - valor: "1"
+      significado: >
+        El volumen final del embalse se fija al valor ingresado en la tabla básica de
+        embalses.
+
+- nombre: ZONAS
+  descripcion: >
+    Activa las restricciones de zonas de seguridad, que limitan la generación mínima
+    o máxima de un grupo de recursos para proteger la operación segura de una parte
+    de la red.
+  familia: zonas
+  estado: sin-verificar
+  valores:
+    - valor: "0"
+      significado: No se modelan las restricciones de zonas de seguridad.
+    - valor: "1"
+      significado: Se modelan las restricciones de zonas de seguridad configuradas.

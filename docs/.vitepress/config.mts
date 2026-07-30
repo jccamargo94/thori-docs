@@ -22,6 +22,12 @@ export default defineConfig({
           text: 'Datos',
           items: [{ text: 'Modelo de datos', link: '/despacho-hidrotermico/datos/' }],
         },
+        {
+          text: 'Referencia',
+          items: [
+            { text: 'Banderas de configuración', link: '/despacho-hidrotermico/referencia/banderas' },
+          ],
+        },
       ],
     },
     outline: { label: 'En esta página', level: [2, 3] },
