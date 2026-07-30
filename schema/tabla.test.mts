@@ -119,3 +119,28 @@ describe('el esquema rechaza datos inválidos', () => {
     expect(TablaSchema.safeParse(sinCampos).success).toBe(true)
   })
 })
+
+describe('ecuacionesFC refleja el código, no el manual', () => {
+  const porId = new Map(tablas.map((t) => [t.datos.id, t.datos]))
+
+  it('curvasfc ya no existe: la reemplaza ecuacionesfc', () => {
+    expect(porId.has('curvasfc')).toBe(false)
+    expect(porId.has('ecuacionesfc')).toBe(true)
+  })
+
+  it('declara los seis campos que el optimizador consume', () => {
+    const campos = porId.get('ecuacionesfc').campos.map((c: { nombre: string }) => c.nombre)
+    expect(campos).toEqual([
+      'recurso',
+      'embalse',
+      'escenario',
+      'intercepto',
+      'coeficientelineal',
+      'coeficientecuadratico',
+    ])
+  })
+
+  it('no se declara no-implementado: el modelo la usa', () => {
+    expect(porId.get('ecuacionesfc').estado).toBe('difiere-v6')
+  })
+})
