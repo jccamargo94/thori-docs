@@ -1,5 +1,5 @@
-id: recursonoconvencionalbasica
-nombre: recursoNoConvencionalBasica
+id: recursonocobasica
+nombre: recursoNoCoBasica
 familia: recursos-no-convencionales
 titulo: Recursos de generación no convencionales
 descripcion: >
@@ -8,7 +8,7 @@ descripcion: >
   no tienen combustible asociado ni topología hidráulica. Incluye su
   capacidad máxima, la empresa dueña y las banderas para modelar su entrada
   futura. Los valores de esta tabla no varían por etapa; la variante por
-  etapa está en recursonoconvencionalperiodo.
+  etapa está en recursonocoperiodo.
 estado: sin-verificar
 manual: "13.1"
 campos:

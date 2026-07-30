@@ -19,7 +19,7 @@ campos:
       Nombre del recurso, sistema hídrico u otra entidad que entra en
       operación. Existe en la tabla básica correspondiente según el campo
       tipo, por lo que puede apuntar a recursohidrobasica, sistemahidrobasica,
-      recursotermicobasica o recursonoconvencionalbasica.
+      recursotermicobasica o recursonocobasica.
     referencia: null
   - nombre: tipo
     tipo: string

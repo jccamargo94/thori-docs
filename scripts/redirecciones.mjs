@@ -4,4 +4,6 @@
 // disparar los efectos del generador, que borra y reescribe el directorio de salida.
 export const REDIRECCIONES = {
   curvasfc: 'ecuacionesfc',
+  recursonoconvencionalbasica: 'recursonocobasica',
+  recursonoconvencionalperiodo: 'recursonocoperiodo',
 }
