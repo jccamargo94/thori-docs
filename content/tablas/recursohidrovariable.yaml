@@ -31,7 +31,7 @@ campos:
     referencia: null
   - nombre: volumen
     tipo: double
-    unidad: Mm3
+    unidad: Hm3
     requerido: true
     descripcion: Volumen de embalse correspondiente a este punto o segmento de la curva.
     referencia: null

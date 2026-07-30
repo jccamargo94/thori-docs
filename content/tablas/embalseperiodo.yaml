@@ -23,13 +23,13 @@ campos:
     referencia: periodobasica.nombre
   - nombre: volminimo
     tipo: double
-    unidad: Mm3
+    unidad: Hm3
     requerido: true
     descripcion: Volumen mínimo del embalse en la etapa.
     referencia: null
   - nombre: volmaximo
     tipo: double
-    unidad: Mm3
+    unidad: Hm3
     requerido: true
     descripcion: Volumen máximo del embalse en la etapa.
     referencia: null

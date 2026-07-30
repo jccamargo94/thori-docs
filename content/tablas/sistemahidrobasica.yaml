@@ -18,7 +18,7 @@ campos:
     referencia: null
   - nombre: factorenergia
     tipo: double
-    unidad: MW/m3/s
+    unidad: null
     requerido: true
     descripcion: >
       Factor para convertir caudal en energía cuando los generadores no se
