@@ -80,7 +80,7 @@ describe('unidades documentadas', () => {
 describe('el esquema rechaza datos inválidos', () => {
   const valida = {
     id: 'ejemplo',
-    nombre: 'Ejemplo',
+    nombre: 'ejemplo',
     familia: 'configuracion',
     titulo: 'Tabla de ejemplo',
     descripcion: 'Una tabla para probar el esquema.',
@@ -111,6 +111,8 @@ describe('el esquema rechaza datos inválidos', () => {
     ['campo sin descripción', { ...valida, campos: [{ ...valida.campos[0], descripcion: '' }] }],
     ['falta el campo requerido titulo', { ...valida, titulo: undefined }],
     ['sin campos pero con estado sin-verificar', { ...valida, campos: [] }],
+    ['nombre en PascalCase', { ...valida, nombre: 'Ejemplo' }],
+    ['id que no deriva del nombre', { ...valida, id: 'otracosa' }],
   ])('rechaza: %s', (_caso, datos) => {
     expect(TablaSchema.safeParse(datos).success).toBe(false)
   })
@@ -159,5 +161,15 @@ describe('redirects de páginas renombradas', () => {
   it('ningún origen pisa una tabla viva', () => {
     const ids = new Set(tablas.map((t) => t.datos.id))
     for (const origen of Object.keys(REDIRECCIONES)) expect(ids).not.toContain(origen)
+  })
+})
+
+describe('el nombre publicado es el nombre real del archivo', () => {
+  it.each(tablas)('$archivo usa camelCase con inicial minúscula', ({ datos }) => {
+    expect(datos.nombre).toMatch(/^[a-z][a-zA-Z0-9]*$/)
+  })
+
+  it.each(tablas)('$archivo tiene id igual a su nombre en minúsculas', ({ datos }) => {
+    expect(datos.id).toBe(datos.nombre.toLowerCase())
   })
 })

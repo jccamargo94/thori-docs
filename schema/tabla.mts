@@ -51,7 +51,7 @@ export const CampoSchema = z.object({
 export const TablaSchema = z
   .object({
     id: z.string().regex(/^[a-z0-9]+$/),
-    nombre: z.string().min(1),
+    nombre: z.string().regex(/^[a-z][a-zA-Z0-9]*$/),
     familia: z.enum(FAMILIAS),
     titulo: z.string().min(1),
     descripcion: z.string().min(1),
@@ -66,6 +66,14 @@ export const TablaSchema = z
   .refine((t) => t.campos.length > 0 || t.estado === 'no-implementado', {
     message: 'una tabla sin campos debe declarar estado: no-implementado',
     path: ['campos'],
+  })
+  // El nombre publicado es el nombre exacto del archivo que el usuario sube: no hay dos
+  // conceptos que separar, y el nombre del manual ya queda anclado por el campo `manual`.
+  // Atar el id al nombre hace el catálogo greppeable contra el código y evita que el URL
+  // de una tabla se desprenda de su nombre real.
+  .refine((t) => t.id === t.nombre.toLowerCase(), {
+    message: 'el id debe ser el nombre en minúsculas',
+    path: ['id'],
   })
 
 export type Campo = z.infer<typeof CampoSchema>
