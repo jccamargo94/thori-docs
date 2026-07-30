@@ -3,6 +3,7 @@ import { readdirSync, readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { parse } from 'yaml'
 import { FAMILIAS, TablaSchema } from './tabla.mts'
+import { REDIRECCIONES } from '../scripts/redirecciones.mjs'
 
 const dir = fileURLToPath(new URL('../content/tablas/', import.meta.url))
 const archivos = readdirSync(dir).filter((f) => f.endsWith('.yaml'))
@@ -142,5 +143,21 @@ describe('ecuacionesFC refleja el código, no el manual', () => {
 
   it('no se declara no-implementado: el modelo la usa', () => {
     expect(porId.get('ecuacionesfc').estado).toBe('difiere-v6')
+  })
+})
+
+describe('redirects de páginas renombradas', () => {
+  it('curvasfc redirige a ecuacionesfc', () => {
+    expect(REDIRECCIONES.curvasfc).toBe('ecuacionesfc')
+  })
+
+  it('ningún destino apunta a una tabla que no existe', () => {
+    const ids = new Set(tablas.map((t) => t.datos.id))
+    for (const destino of Object.values(REDIRECCIONES)) expect(ids).toContain(destino)
+  })
+
+  it('ningún origen pisa una tabla viva', () => {
+    const ids = new Set(tablas.map((t) => t.datos.id))
+    for (const origen of Object.keys(REDIRECCIONES)) expect(ids).not.toContain(origen)
   })
 })

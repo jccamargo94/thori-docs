@@ -2,9 +2,30 @@ import { readdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { basename } from 'node:path'
 import { parse, stringify } from 'yaml'
+import { REDIRECCIONES } from './redirecciones.mjs'
 
 const contentDir = fileURLToPath(new URL('../content/tablas/', import.meta.url))
 const outDir = fileURLToPath(new URL('../docs/despacho-hidrotermico/datos/', import.meta.url))
+
+function paginaRedirect(idViejo, idNuevo) {
+  const destino = `/thori-docs/despacho-hidrotermico/datos/${idNuevo}`
+  const frontmatter = stringify({
+    title: 'Página movida',
+    editLink: false,
+    lastUpdated: false,
+    head: [['meta', { 'http-equiv': 'refresh', content: `0; url=${destino}` }]],
+  }).trim()
+
+  return `---
+${frontmatter}
+---
+
+# Página movida
+
+Esta tabla ahora se documenta en [\`${idNuevo}\`](./${idNuevo}.md). Si tu navegador no te
+lleva solo, seguí el enlace.
+`
+}
 
 // VitePress corre markdown-it con HTML crudo habilitado: un `<` de una descripción se
 // interpretaría como etiqueta. Todo texto que venga del YAML y no esté entre backticks
@@ -79,4 +100,8 @@ for (const archivo of readdirSync(outDir)) {
 for (const archivo of readdirSync(contentDir).filter((f) => f.endsWith('.yaml'))) {
   const tabla = { ...parse(readFileSync(contentDir + archivo, 'utf-8')), id: basename(archivo, '.yaml') }
   writeFileSync(outDir + `${tabla.id}.md`, paginaTabla(tabla))
+}
+
+for (const [idViejo, idNuevo] of Object.entries(REDIRECCIONES)) {
+  writeFileSync(outDir + `${idViejo}.md`, paginaRedirect(idViejo, idNuevo))
 }
