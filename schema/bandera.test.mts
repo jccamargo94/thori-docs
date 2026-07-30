@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { parse } from 'yaml'
 import { BanderaSchema, FAMILIAS } from './bandera.mts'
@@ -52,7 +52,66 @@ describe('el esquema rechaza datos inválidos', () => {
     ['descripción vacía', { ...valida, descripcion: '' }],
     ['familia fuera del enum', { ...valida, familia: 'inventada' }],
     ['valor sin significado', { ...valida, valores: [{ valor: '0', significado: '' }] }],
+    ['archivo con un valor que la bandera no documenta', { ...valida, archivos: [{ tabla: 'ejemplo', fuente: 'modelo', valores: ['9'] }] }],
   ])('rechaza: %s', (_caso, datos) => {
     expect(BanderaSchema.safeParse(datos).success).toBe(false)
+  })
+})
+
+describe('archivos exigidos por cada bandera', () => {
+  const idsTabla = new Set(
+    readdirSync(fileURLToPath(new URL('../content/tablas/', import.meta.url)))
+      .filter((f) => f.endsWith('.yaml'))
+      .map((f) => f.replace(/\.yaml$/, '')),
+  )
+
+  it('AREAS exige areaBasica y areaPeriodo', () => {
+    const areas = banderas.find((b) => b.nombre === 'AREAS')
+    expect(areas.archivos.map((a) => a.tabla).sort()).toEqual(['areabasica', 'areaperiodo'])
+  })
+
+  it('todo archivo declarado apunta a una tabla que existe', () => {
+    for (const b of banderas) {
+      for (const a of b.archivos ?? []) {
+        expect(idsTabla, `${b.nombre}: tabla inexistente ${a.tabla}`).toContain(a.tabla)
+      }
+    }
+  })
+
+  it('toda entrada declara de dónde salió', () => {
+    for (const b of banderas) {
+      for (const a of b.archivos ?? []) {
+        expect(['validador', 'modelo']).toContain(a.fuente)
+      }
+    }
+  })
+
+  it('todo valor declarado en archivos existe entre los valores de la bandera', () => {
+    for (const b of banderas) {
+      for (const a of b.archivos ?? []) {
+        for (const v of a.valores ?? []) {
+          expect(v).not.toBe('0')
+          expect(
+            b.valores.some((x) => x.valor === v),
+            `${b.nombre}: el archivo ${a.tabla} declara el valor ${v}, que la bandera no documenta`,
+          ).toBe(true)
+        }
+      }
+    }
+  })
+
+  it('FCVARIABLE declara ecuacionesfc solo para el valor 3', () => {
+    const fc = banderas.find((b) => b.nombre === 'FCVARIABLE')
+    expect(fc.archivos).toContainEqual({
+      tabla: 'ecuacionesfc',
+      fuente: 'modelo',
+      valores: ['3'],
+    })
+  })
+
+  it('ZONAS declara las dos tablas que solo el modelo exige', () => {
+    const zonas = banderas.find((b) => b.nombre === 'ZONAS')
+    const soloModelo = zonas.archivos.filter((a) => a.fuente === 'modelo').map((a) => a.tabla)
+    expect(soloModelo.sort()).toEqual(['zonaespecial', 'zonarecurso'])
   })
 })

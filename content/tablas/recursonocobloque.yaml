@@ -1,12 +1,12 @@
 id: recursonocobloque
-nombre: RecursoNoCoBloque
+nombre: recursoNoCoBloque
 familia: recursos-no-convencionales
 titulo: Perfil de generación no convencional por bloque
 descripcion: >
   Ajusta la generación de los recursos no convencionales por bloque de
   demanda dentro de cada etapa, con un factor reductor que se multiplica sobre
-  el factorplanta ya definido en recursonoconvencionalbasica o
-  recursonoconvencionalperiodo. Está pensada sobre todo para modelar el
+  el factorplanta ya definido en recursonocobasica o
+  recursonocoperiodo. Está pensada sobre todo para modelar el
   perfil horario de la generación solar, que solo genera en ciertos bloques
   del día.
 estado: sin-verificar
@@ -41,5 +41,5 @@ campos:
       Factor entre 0 y 1 para derratear la capacidad máxima en el bloque;
       normalmente se configura en 0 o 1 para indicar si la tecnología genera o
       no en ese bloque de demanda. Se multiplica junto con el factorplanta de
-      recursonoconvencionalbasica o recursonoconvencionalperiodo.
+      recursonocobasica o recursonocoperiodo.
     referencia: null

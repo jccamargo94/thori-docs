@@ -9,6 +9,9 @@
       significado: No se modelan áreas operativas.
     - valor: "1"
       significado: Se modelan áreas operativas con sus intercambios.
+  archivos:
+    - { tabla: areabasica, fuente: validador }
+    - { tabla: areaperiodo, fuente: validador }
 
 - nombre: CAR
   descripcion: >
@@ -54,6 +57,10 @@
       significado: >
         Se aplica la restricción de contratos de combustible: el recurso solo puede
         consumir combustible de un contrato durante su vigencia.
+  archivos:
+    - { tabla: contratocombustiblebasica, fuente: validador }
+    - { tabla: contratocombustibleperiodo, fuente: validador }
+    - { tabla: contratocombustiblerecurso, fuente: validador }
 
 - nombre: COSTO1
   descripcion: >
@@ -120,6 +127,8 @@
       significado: Se toma la demanda en MW de la tabla de periodos.
     - valor: "2"
       significado: Se toma la demanda en bloques de energía provista por un programa externo.
+  archivos:
+    - { tabla: demandabloque, fuente: modelo, valores: ["2"] }
 
 - nombre: DH
   descripcion: >
@@ -173,8 +182,11 @@
         Se usa una tabla de potencia máxima contra nivel de embalse (acuerdo CNO 833).
     - valor: "3"
       significado: >
-        Se usa una ecuación lineal del factor de conversión en función del nivel del
-        embalse.
+        Se usa una ecuación del factor de conversión en función del nivel del embalse,
+        con intercepto, término lineal y término cuadrático, definida en ecuacionesFC.
+  archivos:
+    - { tabla: recursohidrovariable, fuente: modelo, valores: ["1", "2"] }
+    - { tabla: ecuacionesfc, fuente: modelo, valores: ["3"] }
 
 - nombre: FTVARIABLE
   descripcion: >
@@ -192,6 +204,8 @@
         Se usa una tabla de factores de consumo variables según el nivel de potencia
         despachado. Este modelo agrega variables binarias, lo que aumenta el tiempo de
         ejecución.
+  archivos:
+    - { tabla: recursotermicovariable, fuente: validador }
 
 - nombre: GAS
   descripcion: >
@@ -458,3 +472,8 @@
       significado: No se modelan las restricciones de zonas de seguridad.
     - valor: "1"
       significado: Se modelan las restricciones de zonas de seguridad configuradas.
+  archivos:
+    - { tabla: zonabasica, fuente: validador }
+    - { tabla: zonaperiodo, fuente: validador }
+    - { tabla: zonaespecial, fuente: modelo }
+    - { tabla: zonarecurso, fuente: modelo }

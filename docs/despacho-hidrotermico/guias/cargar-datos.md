@@ -52,6 +52,10 @@ y lanzar simulaciones.
   lupa) de la fila: te lleva a **Inspeccionar archivos**, donde podés elegir la
   gráfica y la métrica de cada tabla cargada. El detalle de cada campo de cada tabla
   está en el [modelo de datos](../datos/).
+- Qué archivos son obligatorios depende de las banderas de configuración que vayas a
+  activar en la simulación: activar áreas operativas, zonas de seguridad o contratos de
+  combustible obliga a subir tablas que sin ellas sobran. La lista completa, bandera por
+  bandera, está en el [catálogo de banderas](../referencia/banderas).
 
 ## Siguiente paso
 

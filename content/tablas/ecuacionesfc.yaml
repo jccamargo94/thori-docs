@@ -1,0 +1,70 @@
+id: ecuacionesfc
+nombre: ecuacionesFC
+familia: recursos-hidraulicos
+titulo: Ecuaciones de factor de conversión
+descripcion: >
+  Coeficientes de la ecuación que da el factor de conversión de un generador
+  hidráulico en función del volumen de su embalse, para las ejecuciones
+  configuradas con FCVARIABLE en 3. Cada fila define una ecuación por pareja de
+  recurso y embalse: el factor se calcula como intercepto más el término lineal
+  más el término cuadrático del volumen, en lugar de interpolarse sobre los
+  puntos de una curva como en recursohidrovariable.
+
+
+  El manual de base de datos, en su sección 8.4, llama a esta tabla CurvasFC y
+  la declara no disponible en la versión del modelo que documenta. El producto
+  sí la implementa, con el nombre de archivo ecuacionesFC y los campos que
+  describe esta página; los campos se derivaron leyendo el código del
+  optimizador que corre hoy, no el manual, y por eso la tabla no lleva unidades:
+  el código da los nombres de columna y la restricción que alimentan, no las
+  unidades de cada coeficiente.
+
+
+  Advertencia sobre la carga: hoy el validador de insumos no exige este archivo
+  aunque la bandera esté activa. Un caso con FCVARIABLE en 3 y sin esta tabla
+  pasa la validación y falla más tarde, al resolver. Ver el issue
+  621 del repositorio de la plataforma.
+estado: difiere-v6
+manual: "8.4"
+campos:
+  - nombre: recurso
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del recurso de generación hidráulico.
+    referencia: recursohidrobasica.nombre
+  - nombre: embalse
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del embalse asociado al recurso de generación hidráulico.
+    referencia: embalsebasica.nombre
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Identificador del escenario a modelar.
+    referencia: null
+  - nombre: intercepto
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Término independiente de la ecuación del factor de conversión.
+    referencia: null
+  - nombre: coeficientelineal
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Coeficiente que multiplica al término lineal del volumen en la ecuación
+      del factor de conversión.
+    referencia: null
+  - nombre: coeficientecuadratico
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Coeficiente que multiplica al término cuadrático del volumen en la
+      ecuación del factor de conversión.
+    referencia: null

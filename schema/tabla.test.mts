@@ -3,6 +3,7 @@ import { readdirSync, readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { parse } from 'yaml'
 import { FAMILIAS, TablaSchema } from './tabla.mts'
+import { REDIRECCIONES } from '../scripts/redirecciones.mjs'
 
 const dir = fileURLToPath(new URL('../content/tablas/', import.meta.url))
 const archivos = readdirSync(dir).filter((f) => f.endsWith('.yaml'))
@@ -79,7 +80,7 @@ describe('unidades documentadas', () => {
 describe('el esquema rechaza datos inválidos', () => {
   const valida = {
     id: 'ejemplo',
-    nombre: 'Ejemplo',
+    nombre: 'ejemplo',
     familia: 'configuracion',
     titulo: 'Tabla de ejemplo',
     descripcion: 'Una tabla para probar el esquema.',
@@ -110,6 +111,8 @@ describe('el esquema rechaza datos inválidos', () => {
     ['campo sin descripción', { ...valida, campos: [{ ...valida.campos[0], descripcion: '' }] }],
     ['falta el campo requerido titulo', { ...valida, titulo: undefined }],
     ['sin campos pero con estado sin-verificar', { ...valida, campos: [] }],
+    ['nombre en PascalCase', { ...valida, nombre: 'Ejemplo' }],
+    ['id que no deriva del nombre', { ...valida, id: 'otracosa' }],
   ])('rechaza: %s', (_caso, datos) => {
     expect(TablaSchema.safeParse(datos).success).toBe(false)
   })
@@ -117,5 +120,56 @@ describe('el esquema rechaza datos inválidos', () => {
   it('acepta una tabla sin campos si declara no-implementado', () => {
     const sinCampos = { ...valida, campos: [], estado: 'no-implementado' }
     expect(TablaSchema.safeParse(sinCampos).success).toBe(true)
+  })
+})
+
+describe('ecuacionesFC refleja el código, no el manual', () => {
+  const porId = new Map(tablas.map((t) => [t.datos.id, t.datos]))
+
+  it('curvasfc ya no existe: la reemplaza ecuacionesfc', () => {
+    expect(porId.has('curvasfc')).toBe(false)
+    expect(porId.has('ecuacionesfc')).toBe(true)
+  })
+
+  it('declara los seis campos que el optimizador consume', () => {
+    const campos = porId.get('ecuacionesfc').campos.map((c: { nombre: string }) => c.nombre)
+    expect(campos).toEqual([
+      'recurso',
+      'embalse',
+      'escenario',
+      'intercepto',
+      'coeficientelineal',
+      'coeficientecuadratico',
+    ])
+  })
+
+  it('no se declara no-implementado: el modelo la usa', () => {
+    expect(porId.get('ecuacionesfc').estado).toBe('difiere-v6')
+  })
+})
+
+describe('redirects de páginas renombradas', () => {
+  it('curvasfc redirige a ecuacionesfc', () => {
+    expect(REDIRECCIONES.curvasfc).toBe('ecuacionesfc')
+  })
+
+  it('ningún destino apunta a una tabla que no existe', () => {
+    const ids = new Set(tablas.map((t) => t.datos.id))
+    for (const destino of Object.values(REDIRECCIONES)) expect(ids).toContain(destino)
+  })
+
+  it('ningún origen pisa una tabla viva', () => {
+    const ids = new Set(tablas.map((t) => t.datos.id))
+    for (const origen of Object.keys(REDIRECCIONES)) expect(ids).not.toContain(origen)
+  })
+})
+
+describe('el nombre publicado es el nombre real del archivo', () => {
+  it.each(tablas)('$archivo usa camelCase con inicial minúscula', ({ datos }) => {
+    expect(datos.nombre).toMatch(/^[a-z][a-zA-Z0-9]*$/)
+  })
+
+  it.each(tablas)('$archivo tiene id igual a su nombre en minúsculas', ({ datos }) => {
+    expect(datos.id).toBe(datos.nombre.toLowerCase())
   })
 })

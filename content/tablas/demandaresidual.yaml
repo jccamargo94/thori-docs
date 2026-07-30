@@ -1,5 +1,5 @@
 id: demandaresidual
-nombre: DemandaResidual
+nombre: demandaResidual
 familia: empresas
 titulo: Demanda residual (modelo de Cournot)
 descripcion: >
@@ -7,6 +7,10 @@ descripcion: >
   manual de referencia declara la tabla pero no define ningún campo para
   ella: indica de forma explícita que no está disponible en la versión 5.0
   del modelo.
+
+
+  El formulario de carga de datos igual permite subir este archivo, dentro del
+  grupo de empresas: el módulo lo acepta y lo guarda, pero el modelo no lo lee.
 estado: no-implementado
 manual: "7.3"
 campos: []

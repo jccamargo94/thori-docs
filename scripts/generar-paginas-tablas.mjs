@@ -2,9 +2,43 @@ import { readdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { basename } from 'node:path'
 import { parse, stringify } from 'yaml'
+import { REDIRECCIONES } from './redirecciones.mjs'
 
 const contentDir = fileURLToPath(new URL('../content/tablas/', import.meta.url))
 const outDir = fileURLToPath(new URL('../docs/despacho-hidrotermico/datos/', import.meta.url))
+
+const banderasFile = fileURLToPath(new URL('../content/banderas.yaml', import.meta.url))
+const banderas = parse(readFileSync(banderasFile, 'utf-8'))
+
+// Relación inversa del mapeo bandera→archivos: se calcula acá para que la página de una
+// tabla diga qué banderas la reclaman sin que nadie mantenga esa lista a mano.
+const banderasPorTabla = new Map()
+for (const b of banderas) {
+  for (const a of b.archivos ?? []) {
+    if (!banderasPorTabla.has(a.tabla)) banderasPorTabla.set(a.tabla, [])
+    banderasPorTabla.get(a.tabla).push({ nombre: b.nombre, valores: a.valores })
+  }
+}
+
+function paginaRedirect(idViejo, idNuevo) {
+  const destino = `/thori-docs/despacho-hidrotermico/datos/${idNuevo}`
+  const frontmatter = stringify({
+    title: 'Página movida',
+    editLink: false,
+    lastUpdated: false,
+    head: [['meta', { 'http-equiv': 'refresh', content: `0; url=${destino}` }]],
+  }).trim()
+
+  return `---
+${frontmatter}
+---
+
+# Página movida
+
+Esta tabla ahora se documenta en [\`${idNuevo}\`](./${idNuevo}.md). Si tu navegador no te
+lleva solo, seguí el enlace.
+`
+}
 
 // VitePress corre markdown-it con HTML crudo habilitado: un `<` de una descripción se
 // interpretaría como etiqueta. Todo texto que venga del YAML y no esté entre backticks
@@ -52,6 +86,22 @@ function paginaTabla(t) {
       ].join('\n')
     : '_Esta tabla no tiene campos: el manual la declara pero indica que no está disponible en la versión del modelo que documenta el manual._'
 
+  const exigidaPor = banderasPorTabla.get(t.id) ?? []
+  const seccionBanderas = exigidaPor.length
+    ? `
+## Cuándo hace falta
+
+Este archivo se vuelve obligatorio al activar ${exigidaPor
+        .map((b) => {
+          const enlace = `[\`${escapeHtml(b.nombre)}\`](../referencia/banderas.md#${b.nombre.toLowerCase()})`
+          if (!b.valores?.length) return enlace
+          const vs = b.valores.map((v) => `\`${escapeHtml(v)}\``).join(' o ')
+          return `${enlace} con valor ${vs}`
+        })
+        .join(', ')}.
+`
+    : ''
+
   return `---
 ${frontmatter}
 ---
@@ -65,7 +115,7 @@ ${textoLibre(t.descripcion)}
 ## Campos
 
 ${campos}
-`
+${seccionBanderas}`
 }
 
 // Limpia huérfanos: un .md generado de una tabla que ya no tiene YAML se queda navegable
@@ -79,4 +129,8 @@ for (const archivo of readdirSync(outDir)) {
 for (const archivo of readdirSync(contentDir).filter((f) => f.endsWith('.yaml'))) {
   const tabla = { ...parse(readFileSync(contentDir + archivo, 'utf-8')), id: basename(archivo, '.yaml') }
   writeFileSync(outDir + `${tabla.id}.md`, paginaTabla(tabla))
+}
+
+for (const [idViejo, idNuevo] of Object.entries(REDIRECCIONES)) {
+  writeFileSync(outDir + `${idViejo}.md`, paginaRedirect(idViejo, idNuevo))
 }
