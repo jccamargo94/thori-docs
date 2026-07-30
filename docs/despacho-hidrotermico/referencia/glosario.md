@@ -67,7 +67,8 @@ una fecha de inicio, una granularidad y un plazo. Ver
 
 Energía que el sistema no logra atender con los recursos disponibles. Su costo por
 etapa se define en el campo `costoracionamiento` de
-[`periodobasica`](../datos/periodobasica) y penaliza la función objetivo.
+[`periodobasica`](../datos/periodobasica); ese costo es, en la práctica, lo que
+desalienta al modelo a dejar demanda sin atender.
 
 ## Recurso de generación
 

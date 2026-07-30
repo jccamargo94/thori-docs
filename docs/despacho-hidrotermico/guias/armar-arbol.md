@@ -22,8 +22,9 @@ una simulación.
    si queda **Activo** y su **Etapa de árbol**.
 4. Hacé clic en **Siguiente**.
 5. En el paso **Crear árbol de escenarios**, revisá el listado que se generó; podés
-   eliminar una fila puntual con el botón de la columna **Acciones**, o todas las
-   seleccionadas con el botón "Eliminar todos" (ícono de papelera, arriba de la tabla).
+   eliminar una fila puntual con el botón de la columna **Acciones**, o seleccionar
+   varias y usar el botón circular de ícono de papelera (arriba de la tabla, con el
+   tooltip "Eliminar todos") para eliminarlas juntas.
 6. Hacé clic en **Guardar árbol**.
 
 Alternativa más rápida: en la pestaña **Arboles de escenarios**, el botón

@@ -39,9 +39,9 @@ simulación, y vas a evitar el malentendido más común con los costos.
   como "ud. de costo/MWh"), no en pesos colombianos ni en dólares. Son comparables
   entre escenarios de una misma simulación, pero no contra precios de mercado. Ver
   el detalle en [Unidades](../referencia/unidades).
-- Si una vista no muestra datos para el elemento elegido, aparece el mensaje "No
-  hay datos para este activo": revisá que el elemento y el escenario elegidos
-  existan en esta simulación.
+- Si una vista no muestra datos para el elemento elegido, aparece el mensaje "No se
+  han encontrado datos para este activo.": revisá que el elemento y el escenario
+  elegidos existan en esta simulación.
 - Un reporte en estado Fallido no se puede descargar; generá uno nuevo con
   **Generar reporte**.
 

@@ -36,10 +36,11 @@ interpretar cada estado hasta que termine.
    rápidas; se habilita el campo **Escenario específico** con el número puntual).
 5. Paso de resumen: revisá la configuración completa y, si querés, abrí
    **Opciones avanzadas** para activar **Calcular también la capa de riesgo**: un
-   cálculo adicional que corre después del despacho de costo mínimo y añade la cola
-   de riesgo — qué tan caro sale el sistema en los escenarios malos —, algo que un
-   despacho de costo mínimo no puede expresar por sí solo. No sustituye a los
-   resultados de siempre; alarga la simulación entre 20 y 80 minutos.
+   cálculo adicional que corre después de que termina la simulación de despacho —sin
+   importar si se configuró para minimizar costos o maximizar utilidades— y le añade
+   la cola de riesgo: qué tan caro sale el sistema en los escenarios malos, algo que
+   el despacho base no puede expresar por sí solo. No sustituye a los resultados de
+   siempre; alarga la simulación entre 20 y 80 minutos.
 6. Hacé clic en **Ejecutar simulación** (el botón dice **Actualizar simulación** o
    **Replicar simulación** si venís de editar o de replicar una existente).
 
