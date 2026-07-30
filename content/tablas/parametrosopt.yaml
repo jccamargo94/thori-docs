@@ -1,0 +1,40 @@
+id: parametrosopt
+nombre: ParametrosOpt
+familia: configuracion
+titulo: Parámetros del optimizador
+descripcion: >
+  Parámetros de configuración del solver que resuelve el problema de optimización.
+  Los nombres corresponden a los del propio solver y no se pueden cambiar sin
+  modificar el código del modelo. Modificarlos sin conocimiento profundo de
+  optimización puede degradar la calidad o el tiempo de la solución.
+estado: sin-verificar
+manual: "1.2"
+campos:
+  - nombre: optimizador
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Solver utilizado en la ejecución. Valores posibles cplex, gurobi y cbc.
+    referencia: null
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: >
+      Nombre exacto del parámetro tal como lo define el solver. Valores habituales
+      timelimit, mipgap, threads para cplex y gurobi; sec, ratioGap y allowableGap para cbc.
+    referencia: null
+  - nombre: valor
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Valor asignado al parámetro. Valores recomendados cplex timelimit 360 y
+      mipgap 0.0001, gurobi timelimit 360 y mipgap 0.001, cbc sec 360 y ratioGap 0.001.
+    referencia: null
+  - nombre: descripcion
+    tipo: string
+    unidad: null
+    requerido: false
+    descripcion: Explicación del parámetro.
+    referencia: null

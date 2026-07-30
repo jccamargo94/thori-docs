@@ -1,0 +1,33 @@
+id: configuracionproblema
+nombre: ConfiguracionProblema
+familia: configuracion
+titulo: Configuración del problema
+descripcion: >
+  Banderas que activan o desactivan restricciones y opciones de la ejecución.
+  Cada fila es una bandera; el catálogo completo está en la referencia de banderas.
+  Los nombres de las banderas están fijados en el código del modelo y no se pueden cambiar.
+estado: sin-verificar
+manual: "1.1"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: >
+      Nombre de la bandera. Está fijado en el código del modelo para activar
+      e inactivar restricciones; no se puede cambiar.
+    referencia: null
+  - nombre: valor
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Valor de la bandera. La mayoría son 1 o 0 (activa o inactiva); algunas
+      admiten más valores, indicados en el catálogo de banderas.
+    referencia: null
+  - nombre: descripcion
+    tipo: string
+    unidad: null
+    requerido: false
+    descripcion: Explicación de para qué sirve la bandera.
+    referencia: null
