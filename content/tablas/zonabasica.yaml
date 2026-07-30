@@ -1,0 +1,39 @@
+id: zonabasica
+nombre: ZonaBasica
+familia: zonas
+titulo: Zonas de seguridad
+descripcion: >
+  Define las zonas de seguridad del sistema: agrupaciones de recursos de
+  generación sobre las que se vigila un límite conjunto de generación, ya sea
+  un mínimo o un máximo, típico de restricciones eléctricas o de seguridad de
+  red. Los recursos que integran cada zona se listan en zonarecurso, y el
+  límite puede variar por etapa en zonaperiodo.
+estado: sin-verificar
+manual: "12.1"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre o identificador de la zona de seguridad.
+    referencia: null
+  - nombre: tipo
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: >
+      Tipo de la zona de seguridad: MW para zonas de mínimo, MX para zonas de
+      máximo.
+    referencia: null
+  - nombre: valor
+    tipo: double
+    unidad: MWh
+    requerido: true
+    descripcion: Valor límite de la zona de seguridad.
+    referencia: null
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Identificador del escenario al que aplica el registro.
+    referencia: null

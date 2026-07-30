@@ -1,0 +1,36 @@
+id: aporteshidricos
+nombre: AportesHidricos
+familia: red-hidraulica
+titulo: Aportes hídricos de los ríos
+descripcion: >
+  Aportes de caudal de los ríos del sistema para cada etapa del horizonte de
+  optimización, por escenario. Es el insumo hidrológico que alimenta el
+  balance de caudal de la red hidráulica.
+estado: sin-verificar
+manual: "11.1"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del río del sistema.
+    referencia: null
+  - nombre: periodo
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Etapa del horizonte de optimización.
+    referencia: periodobasica.nombre
+  - nombre: valor
+    tipo: double
+    unidad: m3/s
+    requerido: true
+    descripcion: Valor del aporte hídrico del río en la etapa.
+    referencia: null
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Número del escenario de aportes; debe ser un número consecutivo.
+    referencia: null

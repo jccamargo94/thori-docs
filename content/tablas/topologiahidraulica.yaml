@@ -1,0 +1,51 @@
+id: topologiahidraulica
+nombre: TopologiaHidraulica
+familia: red-hidraulica
+titulo: Topología de la red hidráulica
+descripcion: >
+  Define el grafo de conexiones de cada sistema hidráulico: qué elemento
+  (embalse, arco, bombeo o río) hace parte del sistema, qué tipo de acción de
+  caudal realiza (turbinamiento, vertimiento o acueducto, de entrada o de
+  salida) y qué generadores se relacionan con ese elemento. Con estas filas
+  el explorador de la red hidráulica dibuja las relaciones entre elementos.
+estado: sin-verificar
+manual: "11.8"
+campos:
+  - nombre: sistema
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del sistema hidráulico al que pertenece el elemento.
+    referencia: sistemahidrobasica.sistema
+  - nombre: elemento
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: >
+      Nombre del elemento hidráulico que hace parte del sistema: un generador,
+      un embalse o un río. Cuando el campo tipo vale E, este nombre
+      corresponde a un embalse (embalsebasica.nombre); cuando vale R,
+      corresponde a un río (ver aporteshidricos.nombre); en el resto de
+      valores de tipo corresponde a un arco o bombeo definido en
+      elementohidraulicobasica.
+    referencia: elementohidraulicobasica.nombre
+  - nombre: tipo
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: >
+      Tipo de acción de caudal que realiza el elemento. Los valores están
+      fijados en el código del modelo: A (salida de acueducto), AA (entrada
+      de acueducto aguas arriba), TG (salida de turbinamiento), AT (entrada
+      de turbinamiento aguas arriba), E (embalse asociado al sistema), R (río
+      asociado al sistema), V (salida de vertimiento) y AV (entrada de
+      vertimiento aguas arriba).
+    referencia: null
+  - nombre: relaciones
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: >
+      Nombres de los generadores relacionados con el río o el embalse de esta
+      fila; si hay varios, se ingresan separados por coma.
+    referencia: recursohidrobasica.nombre

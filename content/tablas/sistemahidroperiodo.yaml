@@ -1,0 +1,35 @@
+id: sistemahidroperiodo
+nombre: SistemaHidroPeriodo
+familia: red-hidraulica
+titulo: Sistemas hidráulicos por etapa
+descripcion: >
+  Límites de turbinamiento de los sistemas hidráulicos que pueden variar de
+  una etapa de optimización a otra. Es la contraparte por etapa de
+  sistemahidrobasica.
+estado: sin-verificar
+manual: "11.7"
+campos:
+  - nombre: sistema
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del sistema hidráulico.
+    referencia: sistemahidrobasica.sistema
+  - nombre: periodo
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Etapa del horizonte de optimización.
+    referencia: periodobasica.nombre
+  - nombre: turbinamientominimo
+    tipo: double
+    unidad: m3/s
+    requerido: true
+    descripcion: Turbinamiento mínimo del sistema hidráulico en la etapa.
+    referencia: null
+  - nombre: turbinamientomaximo
+    tipo: double
+    unidad: m3/s
+    requerido: true
+    descripcion: Turbinamiento máximo del sistema hidráulico en la etapa.
+    referencia: null

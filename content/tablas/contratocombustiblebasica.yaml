@@ -1,0 +1,62 @@
+id: contratocombustiblebasica
+nombre: ContratoCombustibleBasica
+familia: contratos-combustible
+titulo: Contratos de combustible
+descripcion: >
+  Información básica de los contratos de combustible: el tipo de contrato,
+  su capacidad y consumo mínimo de retiro por hora, el costo del contrato y
+  las etapas de inicio y fin de su vigencia. Mientras un contrato está
+  vigente, el recurso asociado solo puede consumir el combustible que ese
+  contrato provee.
+estado: sin-verificar
+manual: "5.1"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del contrato de combustible.
+    referencia: null
+  - nombre: tipo
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: >
+      Tipo de contrato de combustible asociado, usado solo para reportes; no
+      lo usa la formulación matemática.
+    referencia: null
+  - nombre: capacidadhora
+    tipo: double
+    unidad: MBTUh
+    requerido: true
+    descripcion: Capacidad del contrato de combustible en términos de tasa de retiro de combustible.
+    referencia: null
+  - nombre: minimohora
+    tipo: double
+    unidad: MBTUh
+    requerido: true
+    descripcion: >
+      Consumo mínimo del contrato de combustible en términos de tasa de
+      retiro de combustible.
+    referencia: null
+  - nombre: costocontrato
+    tipo: double
+    unidad: $/MBTU
+    requerido: true
+    descripcion: Costo del contrato de combustible.
+    referencia: null
+  - nombre: etapainicial
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Etapa en la que inicia la vigencia del contrato; mientras el contrato
+      está vigente, el recurso asociado solo puede consumir el combustible de
+      sus contratos.
+    referencia: periodobasica.nombre
+  - nombre: etapafinal
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Etapa en la que finaliza la vigencia del contrato.
+    referencia: periodobasica.nombre

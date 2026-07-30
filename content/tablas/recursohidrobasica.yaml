@@ -1,0 +1,117 @@
+id: recursohidrobasica
+nombre: RecursoHidroBasica
+familia: recursos-hidraulicos
+titulo: Recursos de generación hidráulicos
+descripcion: >
+  Información básica de los recursos de generación hidráulicos: su factor de
+  conversión, límites de generación, costo variable y las banderas que
+  controlan su comportamiento en el modelo (recurso obligatorio, factor de
+  conversión variable, participación en Cournot). Los valores de esta tabla
+  no varían por etapa; la variante por etapa está en recursohidroperiodo.
+estado: sin-verificar
+manual: "8.1"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del recurso de generación hidráulico.
+    referencia: null
+  - nombre: factordisponibilidad
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Factor entre 0 y 1 para derratear la capacidad máxima del recurso; la
+      capacidad máxima se multiplica por este factor.
+    referencia: null
+  - nombre: factorconversionpromedio
+    tipo: double
+    unidad: MW/m3/s
+    requerido: true
+    descripcion: >
+      Factor de conversión promedio del recurso, usado para transformar
+      caudal turbinado en energía.
+    referencia: null
+  - nombre: minimo
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Mínimo del recurso de generación. Solo lo utiliza el modelo si la
+      bandera obligatorio vale 1 o si se activa la bandera de unidades en las
+      restricciones.
+    referencia: null
+  - nombre: maximo
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: Máximo del recurso de generación hidráulico.
+    referencia: null
+  - nombre: costovariable
+    tipo: double
+    unidad: $/MWh
+    requerido: true
+    descripcion: Costo variable asociado al recurso de generación hidráulico.
+    referencia: null
+  - nombre: porcentajeagc
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Factor entre 0 y 1 que multiplica la reserva AGC del sistema definida en
+      periodobasica; el resultado se resta de la capacidad máxima del
+      recurso.
+    referencia: null
+  - nombre: factorconversionvariable
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Bandera 1/0 que indica si el recurso tiene factor de conversión
+      variable con el volumen del embalse; también se usa para modelar
+      capacidad máxima variable con el volumen del embalse.
+    referencia: null
+  - nombre: empresa
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre de la empresa dueña del recurso de generación hidráulico.
+    referencia: empresabasica.nombre
+  - nombre: obligatorio
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Bandera 1/0 que indica si el recurso es obligatorio; un recurso
+      obligatorio se despacha al menos en su valor mínimo.
+    referencia: null
+  - nombre: etapaentrada
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Valor indicativo de que el recurso es futuro; cuando aplica, la fecha
+      real de entrada se ingresa en la tabla de fechas de entrada.
+    referencia: null
+  - nombre: subarea
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Subárea a la que pertenece la empresa dueña del recurso.
+    referencia: null
+  - nombre: modelocournot
+    tipo: integer
+    unidad: null
+    requerido: false
+    descripcion: >
+      Bandera para activar el recurso en el modelo de competencia de Cournot;
+      esta opción no es funcional en la versión 5.0.
+    referencia: null
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Identificador del escenario a modelar; debe ser un número consecutivo.
+    referencia: null

@@ -1,0 +1,60 @@
+id: recursohidrovariable
+nombre: RecursoHidroVariable
+familia: recursos-hidraulicos
+titulo: Curva de conversión variable de recursos hidráulicos
+descripcion: >
+  Curva de factor de conversión y capacidad máxima en función del volumen del
+  embalse, para los generadores hidráulicos configurados con factor de
+  conversión variable en recursohidrobasica. Cada fila es un punto (segmento)
+  de la curva, no un recurso completo: un mismo recurso ocupa varias filas,
+  una por cada segmento de su curva de volumen.
+estado: sin-verificar
+manual: "8.3"
+campos:
+  - nombre: recurso
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del recurso de generación hidráulico.
+    referencia: recursohidrobasica.nombre
+  - nombre: embalse
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del embalse asociado al recurso de generación hidráulico.
+    referencia: embalsebasica.nombre
+  - nombre: segmento
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Número consecutivo que indexa cada punto de la curva de volumen.
+    referencia: null
+  - nombre: volumen
+    tipo: double
+    unidad: Mm3
+    requerido: true
+    descripcion: Volumen de embalse correspondiente a este punto o segmento de la curva.
+    referencia: null
+  - nombre: factorconversion
+    tipo: double
+    unidad: MW/m3/s
+    requerido: true
+    descripcion: >
+      Factor de conversión asociado a este punto o segmento de la curva de
+      volumen.
+    referencia: null
+  - nombre: generacionmaxima
+    tipo: double
+    unidad: MWh
+    requerido: false
+    descripcion: >
+      Generación máxima asociada a este punto o segmento de la curva de
+      volumen, según el Acuerdo CNO 833. Si el recurso no varía su capacidad
+      según el nivel del embalse, se recomienda dejar el campo vacío.
+    referencia: null
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Identificador del escenario a modelar.
+    referencia: null

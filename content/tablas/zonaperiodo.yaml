@@ -1,0 +1,43 @@
+id: zonaperiodo
+nombre: ZonaPeriodo
+familia: zonas
+titulo: Zonas de seguridad por etapa
+descripcion: >
+  Es la contraparte por etapa de zonabasica: permite que el tipo de límite
+  (mínimo o máximo) y su valor cambien de una etapa de optimización a otra
+  para una misma zona de seguridad.
+estado: sin-verificar
+manual: "12.2"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre de la zona de seguridad.
+    referencia: zonabasica.nombre
+  - nombre: periodo
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Etapa del horizonte de optimización a la que aplica el registro.
+    referencia: periodobasica.nombre
+  - nombre: tipo
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: >
+      Tipo de la zona de seguridad en la etapa: MW para zonas de mínimo, MX
+      para zonas de máximo.
+    referencia: null
+  - nombre: valor
+    tipo: double
+    unidad: MWh
+    requerido: true
+    descripcion: Valor límite de la zona de seguridad en la etapa.
+    referencia: null
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Identificador del escenario al que aplica el registro.
+    referencia: null

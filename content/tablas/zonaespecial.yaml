@@ -1,0 +1,36 @@
+id: zonaespecial
+nombre: ZonaEspecial
+familia: zonas
+titulo: Rangos especiales de zona de seguridad
+descripcion: >
+  Guarda un rango, delimitado por un índice inicial y uno final, para zonas de
+  seguridad especiales. El manual de 2021 no aclara sobre qué se cuentan esos
+  índices (por ejemplo, posiciones dentro de un periodo o de un listado de
+  recursos de la zona), así que la tabla se documenta con lo que el manual sí
+  declara.
+estado: sin-verificar
+manual: "12.4"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre de la zona de seguridad especial.
+    referencia: zonabasica.nombre
+  - nombre: indeceini
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Índice inicial del rango de la zona especial. El manual no precisa sobre
+      qué colección se indexa; se transcribe tal como aparece, typo incluido
+      en el nombre del campo.
+    referencia: null
+  - nombre: indicefin
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Índice final del rango de la zona especial. Mismo comentario que
+      indeceini sobre la falta de precisión del manual.
+    referencia: null

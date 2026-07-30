@@ -1,0 +1,56 @@
+id: combustiblebasica
+nombre: CombustibleBasica
+familia: combustibles
+titulo: Centros de producción de combustible
+descripcion: >
+  Información básica de los centros de producción y abastecimiento de
+  combustible: el tipo de combustible que manejan, su capacidad y consumo
+  mínimo de retiro por hora, y los costos de combustible y de transporte
+  hasta el recurso de generación. Los valores no varían por etapa; la
+  variante por etapa está en combustibleperiodo.
+estado: sin-verificar
+manual: "4.1"
+campos:
+  - nombre: centroabastecimiento
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del centro de abastecimiento de combustible.
+    referencia: null
+  - nombre: tipo
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: >
+      Identificador del tipo de combustible del centro: L para líquidos, G
+      para gas y C para carbón. Se usa solo para reportes, no lo usa la
+      formulación matemática.
+    referencia: null
+  - nombre: capacidadhora
+    tipo: double
+    unidad: MBTUh
+    requerido: true
+    descripcion: Capacidad del centro de combustible en términos de tasa de retiro de combustible.
+    referencia: null
+  - nombre: minimohora
+    tipo: double
+    unidad: MBTUh
+    requerido: true
+    descripcion: >
+      Consumo mínimo del centro de combustible en términos de tasa de retiro
+      de combustible.
+    referencia: null
+  - nombre: costocombustible
+    tipo: double
+    unidad: $/MBTU
+    requerido: true
+    descripcion: Costo del combustible en el centro de producción.
+    referencia: null
+  - nombre: costotransporte
+    tipo: double
+    unidad: $/MBTU
+    requerido: true
+    descripcion: >
+      Costo de transportar el combustible desde el centro de producción hasta
+      el recurso de generación.
+    referencia: null

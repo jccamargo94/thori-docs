@@ -1,0 +1,46 @@
+id: sistemahidrobasica
+nombre: SistemaHidroBasica
+familia: red-hidraulica
+titulo: Sistemas hidráulicos
+descripcion: >
+  Información básica de los sistemas hidráulicos definidos: el factor de
+  conversión de energía a nivel de sistema y sus límites de turbinamiento.
+  Los valores de esta tabla no varían por etapa; la variante por etapa está
+  en sistemahidroperiodo.
+estado: sin-verificar
+manual: "11.6"
+campos:
+  - nombre: sistema
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del sistema hidráulico.
+    referencia: null
+  - nombre: factorenergia
+    tipo: double
+    unidad: MW/m3/s
+    requerido: true
+    descripcion: >
+      Factor para convertir caudal en energía cuando los generadores no se
+      relacionan explícitamente en la tabla topologiahidraulica.
+    referencia: null
+  - nombre: turbinamientominimo
+    tipo: double
+    unidad: m3/s
+    requerido: true
+    descripcion: Turbinamiento mínimo del sistema hidráulico.
+    referencia: null
+  - nombre: turbinamientomaximo
+    tipo: double
+    unidad: m3/s
+    requerido: true
+    descripcion: Turbinamiento máximo del sistema hidráulico.
+    referencia: null
+  - nombre: etapaentrada
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Valor indicativo de que el sistema hidráulico es futuro; cuando aplica,
+      la fecha real de entrada se ingresa en la tabla de fechas de entrada.
+    referencia: null

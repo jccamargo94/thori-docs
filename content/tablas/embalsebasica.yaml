@@ -1,0 +1,97 @@
+id: embalsebasica
+nombre: EmbalseBasica
+familia: red-hidraulica
+titulo: Embalses
+descripcion: >
+  Información básica de los embalses: volúmenes mínimo, máximo, inicial y
+  final, vertimiento máximo, filtración y las penalizaciones que aplica el
+  modelo sobre el vertimiento. Los valores de esta tabla no varían por etapa;
+  la variante por etapa está en embalseperiodo.
+estado: sin-verificar
+manual: "11.4"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del embalse.
+    referencia: null
+  - nombre: volminimo
+    tipo: double
+    unidad: Mm3
+    requerido: true
+    descripcion: Volumen mínimo del embalse.
+    referencia: null
+  - nombre: volmaximo
+    tipo: double
+    unidad: Mm3
+    requerido: true
+    descripcion: Volumen máximo del embalse.
+    referencia: null
+  - nombre: volumeninicial
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Volumen inicial del embalse, en p.u. (valor entre 0 y 1) del volumen
+      útil; el volumen útil es la diferencia entre el volumen máximo y el
+      mínimo.
+    referencia: null
+  - nombre: volumenfinal
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Volumen final del embalse, en p.u. (valor entre 0 y 1); el modelo
+      respeta esta restricción en la última etapa modelada.
+    referencia: null
+  - nombre: vertimientomaximo
+    tipo: double
+    unidad: Mm3
+    requerido: true
+    descripcion: Vertimiento máximo del embalse por etapa.
+    referencia: null
+  - nombre: filtracion
+    tipo: double
+    unidad: m3/s
+    requerido: true
+    descripcion: Filtración del embalse; es una pérdida de caudal.
+    referencia: null
+  - nombre: factorrecuperacion
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Factor multiplicador entre 0 y 1 que representa el caudal recuperable
+      de la filtración, cuando esta cae en un elemento aguas abajo.
+    referencia: null
+  - nombre: factorpenalizacionvertimiento
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Factor multiplicador usado para penalizar los vertimientos en la
+      función objetivo; se multiplica por el costo de racionamiento definido
+      en periodobasica.
+    referencia: null
+  - nombre: empresa
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre de la empresa asociada al embalse.
+    referencia: empresabasica.nombre
+  - nombre: etapaentrada
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Valor indicativo de que el embalse es futuro; cuando aplica, la fecha
+      real de entrada se ingresa en la tabla de fechas de entrada.
+    referencia: null
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Identificador del escenario a modelar; debe ser un número consecutivo.
+    referencia: null

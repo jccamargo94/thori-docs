@@ -1,0 +1,59 @@
+id: recursotermicoperiodo
+nombre: RecursoTermicoPeriodo
+familia: recursos-termicos
+titulo: Recursos térmicos por etapa
+descripcion: >
+  Información de los recursos de generación térmicos que puede variar de una
+  etapa a otra: costo variable, límites mínimo y máximo de generación, y la
+  bandera de obligatoriedad. Es la contraparte por etapa de
+  recursotermicobasica.
+estado: sin-verificar
+manual: "9.2"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del recurso de generación térmico al que aplica el registro.
+    referencia: recursotermicobasica.nombre
+  - nombre: periodo
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Etapa del horizonte de optimización a la que aplica el registro.
+    referencia: periodobasica.nombre
+  - nombre: costovariable
+    tipo: double
+    unidad: $/MWh
+    requerido: true
+    descripcion: Costo variable asociado a la generación del recurso térmico en la etapa.
+    referencia: null
+  - nombre: minimo
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Mínimo de generación del recurso térmico en la etapa; solo se aplica
+      cuando la bandera obligatorio vale 1.
+    referencia: null
+  - nombre: maximo
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: Máximo de generación del recurso térmico en la etapa.
+    referencia: null
+  - nombre: obligatorio
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Bandera 1/0 que indica si el recurso es obligatorio en la etapa; un
+      recurso obligatorio se despacha al menos en su valor mínimo.
+    referencia: null
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Identificador del escenario a modelar; debe ser un número consecutivo.
+    referencia: null

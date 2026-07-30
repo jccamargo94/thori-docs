@@ -1,0 +1,37 @@
+id: recursotermicovariable
+nombre: RecursoTermicoVariable
+familia: recursos-termicos
+titulo: Curva de consumo variable de recursos térmicos
+descripcion: >
+  Curva de factor de consumo de combustible en función de la generación,
+  para los recursos térmicos marcados con consumo variable en
+  recursotermicobasica. Cada fila representa un segmento de la curva —no un
+  recurso completo— con su generación máxima y el factor de consumo asociado
+  a ese punto.
+estado: sin-verificar
+manual: "9.3"
+campos:
+  - nombre: recurso
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del recurso de generación térmico al que pertenece el segmento de la curva.
+    referencia: recursotermicobasica.nombre
+  - nombre: segmento
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Número consecutivo que indexa cada segmento de la curva de generación del recurso.
+    referencia: null
+  - nombre: generacionmaxima
+    tipo: double
+    unidad: MWh
+    requerido: true
+    descripcion: Generación máxima del segmento de la curva.
+    referencia: null
+  - nombre: factorconsumo
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: Factor de consumo de combustible asociado al segmento de la curva.
+    referencia: null

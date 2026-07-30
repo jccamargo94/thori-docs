@@ -1,0 +1,35 @@
+id: arbolescenarios
+nombre: ArbolEscenarios
+familia: escenarios
+titulo: Árbol de escenarios
+descripcion: >
+  Es la tabla que la aplicación arma automáticamente en la sección Escenarios
+  cuando el usuario activa dos o más tablas en escenariosbasica (por ejemplo,
+  distintos casos de aportes hídricos y distintos casos de precio de
+  combustible): cada fila representa una combinación puntual de esas
+  dimensiones, identificada por un número de escenario consecutivo, y es la
+  unidad con la que después se referencian todas las salidas de la
+  simulación por lotes. Esta tabla no se llena a mano, la genera el programa
+  de actualización del árbol de escenarios a partir de la configuración
+  vigente en escenariosbasica.
+estado: sin-verificar
+manual: "14.2"
+campos:
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Número del escenario combinado simulado; identifica de forma única cada
+      rama del árbol y con él se referencian todas las salidas de la
+      simulación.
+    referencia: null
+  - nombre: probabilidad
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Probabilidad de ocurrencia de esta combinación de escenario. Solo se usa
+      en la versión 5.0, para desactivar una rama del árbol que el usuario
+      quiera excluir de la simulación, colocando el valor en cero.
+    referencia: null

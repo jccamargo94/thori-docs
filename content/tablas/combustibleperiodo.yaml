@@ -1,0 +1,61 @@
+id: combustibleperiodo
+nombre: CombustiblePeriodo
+familia: combustibles
+titulo: Centros de producción de combustible por etapa
+descripcion: >
+  Información de los centros de producción de combustible que puede variar
+  de una etapa de optimización a otra: capacidad y consumo mínimo de retiro
+  por hora, y costos de combustible y de transporte. Es la contraparte por
+  etapa de combustiblebasica.
+estado: sin-verificar
+manual: "4.2"
+campos:
+  - nombre: centroabastecimiento
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del centro de abastecimiento de combustible al que aplica el registro.
+    referencia: combustiblebasica.centroabastecimiento
+  - nombre: periodo
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Etapa del horizonte de optimización a la que aplica el registro.
+    referencia: periodobasica.nombre
+  - nombre: capacidadhora
+    tipo: double
+    unidad: MBTUh
+    requerido: true
+    descripcion: >
+      Capacidad del centro de combustible en la etapa, en términos de tasa de
+      retiro de combustible.
+    referencia: null
+  - nombre: minimohora
+    tipo: double
+    unidad: MBTUh
+    requerido: true
+    descripcion: >
+      Consumo mínimo del centro de combustible en la etapa, en términos de
+      tasa de retiro de combustible.
+    referencia: null
+  - nombre: costocombustible
+    tipo: double
+    unidad: $/MBTU
+    requerido: true
+    descripcion: Costo del combustible en el centro de producción, en la etapa.
+    referencia: null
+  - nombre: costotransporte
+    tipo: double
+    unidad: $/MBTU
+    requerido: true
+    descripcion: >
+      Costo de transportar el combustible desde el centro de producción hasta
+      el recurso de generación, en la etapa.
+    referencia: null
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Identificador del escenario a modelar; debe ser un número consecutivo.
+    referencia: null

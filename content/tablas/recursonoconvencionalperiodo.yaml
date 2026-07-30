@@ -1,0 +1,44 @@
+id: recursonoconvencionalperiodo
+nombre: RecursoNoConvencionalPeriodo
+familia: recursos-no-convencionales
+titulo: Recursos no convencionales por etapa
+descripcion: >
+  Es la contraparte por etapa de recursonoconvencionalbasica: permite que la
+  capacidad máxima y el factor de derrateo de un recurso de generación no
+  convencional cambien de una etapa de optimización a otra.
+estado: sin-verificar
+manual: "13.2"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del recurso de generación no convencional.
+    referencia: recursonoconvencionalbasica.nombre
+  - nombre: periodo
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Etapa de optimización a la que aplica el registro.
+    referencia: periodobasica.nombre
+  - nombre: maximo
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: Capacidad máxima del recurso de generación no convencional en la etapa.
+    referencia: null
+  - nombre: factorplanta
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Factor entre 0 y 1 para derratear la capacidad máxima del recurso en la
+      etapa; la capacidad máxima se multiplica por este factor.
+    referencia: null
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Identificador del escenario a modelar; debe ser un número consecutivo.
+    referencia: null

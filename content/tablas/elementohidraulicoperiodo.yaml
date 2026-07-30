@@ -1,0 +1,49 @@
+id: elementohidraulicoperiodo
+nombre: ElementoHidraulicoPeriodo
+familia: red-hidraulica
+titulo: Elementos hidráulicos por etapa
+descripcion: >
+  Información de los elementos hidráulicos (arcos y bombeos) que puede variar
+  de una etapa de optimización a otra: límites de turbinamiento y filtración.
+  Es la contraparte por etapa de elementohidraulicobasica.
+estado: sin-verificar
+manual: "11.3"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del elemento hidráulico.
+    referencia: elementohidraulicobasica.nombre
+  - nombre: periodo
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Etapa del horizonte de optimización.
+    referencia: periodobasica.nombre
+  - nombre: turminimo
+    tipo: double
+    unidad: m3/s
+    requerido: true
+    descripcion: Turbinamiento mínimo del elemento hidráulico en la etapa.
+    referencia: null
+  - nombre: turmaximo
+    tipo: double
+    unidad: m3/s
+    requerido: true
+    descripcion: Turbinamiento máximo del elemento hidráulico en la etapa.
+    referencia: null
+  - nombre: filtracion
+    tipo: double
+    unidad: m3/s
+    requerido: true
+    descripcion: Filtración del elemento hidráulico en la etapa; es una pérdida de caudal.
+    referencia: null
+  - nombre: factorrecuperacion
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Factor multiplicador entre 0 y 1 que representa el caudal recuperable
+      de la filtración, cuando esta cae en un elemento aguas abajo.
+    referencia: null

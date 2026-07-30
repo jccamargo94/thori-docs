@@ -1,0 +1,24 @@
+id: recursosexcluyentes
+nombre: RecursosExcluyentes
+familia: recursos-termicos
+titulo: Recursos térmicos excluyentes
+descripcion: >
+  Pares de recursos de generación térmicos bicombustible que no pueden
+  operar al mismo tiempo: mientras uno de los dos genera, el otro debe
+  permanecer apagado. El orden de los recursos dentro del par es
+  indiferente.
+estado: sin-verificar
+manual: "9.4"
+campos:
+  - nombre: recurso1
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre de uno de los recursos térmicos del par excluyente.
+    referencia: recursotermicobasica.nombre
+  - nombre: recurso2
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del otro recurso térmico del par excluyente.
+    referencia: recursotermicobasica.nombre

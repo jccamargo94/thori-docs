@@ -1,0 +1,48 @@
+id: escenariosbasica
+nombre: EscenariosBasica
+familia: escenarios
+titulo: Configuración de simulación de escenarios
+descripcion: >
+  Configura qué tablas de entrada con campo escenario participan en una
+  simulación de múltiples escenarios o modelo iterativo: por cada tabla
+  marcada como activa se indica cuántos escenarios o casos de información
+  tiene definidos y el orden en que se combina dentro del árbol de
+  escenarios. Es la tabla de control que arbolescenarios usa para generar
+  automáticamente todas las combinaciones a simular.
+estado: sin-verificar
+manual: "14.1"
+campos:
+  - nombre: variable
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre de la tabla de entrada que tiene campo escenario.
+    referencia: null
+  - nombre: numeroescenarios
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Cantidad de escenarios o casos de información que se quieren generar en
+      la simulación; debe corresponder con los valores usados en el campo
+      escenario de la tabla relacionada.
+    referencia: null
+  - nombre: activo
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Bandera 0/1 para activar la tabla relacionada en la simulación de
+      escenarios; si el valor es cero, la tabla no se tiene en cuenta. El
+      manual no declara un tipo explícito para este campo; se documenta como
+      integer por describirse como una bandera 0/1.
+    referencia: null
+  - nombre: etapaarbol
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Orden de la tabla dentro del árbol de escenarios. El manual tampoco
+      declara un tipo explícito para este campo; se documenta como integer
+      por tratarse de una posición ordinal.
+    referencia: null

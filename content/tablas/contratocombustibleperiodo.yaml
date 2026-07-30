@@ -1,0 +1,52 @@
+id: contratocombustibleperiodo
+nombre: ContratoCombustiblePeriodo
+familia: contratos-combustible
+titulo: Contratos de combustible por etapa
+descripcion: >
+  Información de los contratos de combustible que puede variar de una etapa
+  a otra: capacidad y consumo mínimo de retiro por hora, y costo del
+  contrato. Es la contraparte por etapa de contratocombustiblebasica.
+estado: sin-verificar
+manual: "5.2"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del contrato de combustible al que aplica el registro.
+    referencia: contratocombustiblebasica.nombre
+  - nombre: periodo
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Etapa del horizonte de optimización a la que aplica el registro.
+    referencia: periodobasica.nombre
+  - nombre: capacidadhora
+    tipo: double
+    unidad: MBTUh
+    requerido: true
+    descripcion: >
+      Capacidad del contrato de combustible en la etapa, en términos de tasa
+      de retiro de combustible.
+    referencia: null
+  - nombre: minimohora
+    tipo: double
+    unidad: MBTUh
+    requerido: true
+    descripcion: >
+      Consumo mínimo del contrato de combustible en la etapa, en términos de
+      tasa de retiro de combustible.
+    referencia: null
+  - nombre: costocontrato
+    tipo: double
+    unidad: $/MBTU
+    requerido: true
+    descripcion: Costo del contrato de combustible en la etapa.
+    referencia: null
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Identificador del escenario a modelar; debe ser un número consecutivo.
+    referencia: null

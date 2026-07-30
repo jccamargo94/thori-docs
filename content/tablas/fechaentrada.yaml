@@ -1,0 +1,44 @@
+id: fechaentrada
+nombre: FechaEntrada
+familia: fechas
+titulo: Fecha de entrada de recursos futuros
+descripcion: >
+  Guarda la fecha calendario en la que un recurso de generación, un sistema
+  hídrico o cualquier otra entidad configurada como futura entra en operación
+  dentro del horizonte de simulación. Complementa al campo etapaentrada de las
+  tablas básicas de recursos, que solo marca que la entrada es futura sin decir
+  cuándo ocurre exactamente.
+estado: sin-verificar
+manual: "10.1"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: >
+      Nombre del recurso, sistema hídrico u otra entidad que entra en
+      operación. Existe en la tabla básica correspondiente según el campo
+      tipo, por lo que puede apuntar a recursohidrobasica, sistemahidrobasica,
+      recursotermicobasica o recursonoconvencionalbasica.
+    referencia: null
+  - nombre: tipo
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: >
+      Tabla básica a la que pertenece el recurso: recursoHidroBasica,
+      sistemaHidroBasica, recursoTermicoBasica o recursoNoCoBasica.
+    referencia: null
+  - nombre: fechaentrada
+    tipo: date
+    unidad: null
+    requerido: true
+    descripcion: Fecha calendario en la que el recurso entra en operación.
+    referencia: null
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Identificador del escenario a modelar; debe ser un número consecutivo.
+    referencia: null

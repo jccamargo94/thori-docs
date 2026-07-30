@@ -1,0 +1,53 @@
+id: elementohidraulicobasica
+nombre: ElementoHidraulicoBasica
+familia: red-hidraulica
+titulo: Elementos hidráulicos (arcos y bombeos)
+descripcion: >
+  Información básica de los elementos de la configuración hidráulica que no
+  son generadores ni embalses: arcos de conducción y estaciones de bombeo.
+  Define sus límites de turbinamiento y la filtración que se pierde al pasar
+  por el elemento. Los valores de esta tabla no varían por etapa; la
+  variante por etapa está en elementohidraulicoperiodo.
+estado: sin-verificar
+manual: "11.2"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre del elemento hidráulico (arco o estación de bombeo).
+    referencia: null
+  - nombre: turminimo
+    tipo: double
+    unidad: m3/s
+    requerido: true
+    descripcion: Turbinamiento mínimo del elemento hidráulico.
+    referencia: null
+  - nombre: turmaximo
+    tipo: double
+    unidad: m3/s
+    requerido: true
+    descripcion: Turbinamiento máximo del elemento hidráulico.
+    referencia: null
+  - nombre: filtracion
+    tipo: double
+    unidad: m3/s
+    requerido: true
+    descripcion: Filtración del elemento hidráulico; es una pérdida de caudal.
+    referencia: null
+  - nombre: factorrecuperacion
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Factor multiplicador entre 0 y 1 que representa el caudal recuperable
+      de la filtración, cuando esta cae en un elemento aguas abajo.
+    referencia: null
+  - nombre: etapaentrada
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Valor indicativo de que el elemento es futuro; cuando aplica, la fecha
+      real de entrada se ingresa en la tabla de fechas de entrada.
+    referencia: null
