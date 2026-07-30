@@ -25,7 +25,9 @@
   "private": "true",
   "type": "module",
   "devDependencies": {
+    "mermaid": "^11.16.0",
     "vitepress": "^1.6.4",
+    "vitepress-plugin-mermaid": "^2.0.17",
     "vitest": "^4.1.10",
     "yaml": "^2.9.0",
     "zod": "^4.4.3"

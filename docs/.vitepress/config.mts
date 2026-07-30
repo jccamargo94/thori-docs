@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 
-export default defineConfig({
+export default withMermaid({
   lang: 'es-CO',
   title: 'Documentación Thori',
   description: 'Documentación de producto de la plataforma Thori',
@@ -38,3 +39,4 @@ export default defineConfig({
     sidebarMenuLabel: 'Menú',
   },
 })
+
