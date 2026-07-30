@@ -44,7 +44,10 @@ ${valores}
 `
 }
 
-const frontmatter = stringify({ title: 'Banderas de configuración' }).trim()
+// El archivo salió del índice de git al volverse generado (ver .gitignore), así que
+// su fecha de "última actualización" derivada de git quedaría congelada para
+// siempre en el momento en que se dejó de versionar. `lastUpdated: false` la apaga.
+const frontmatter = stringify({ title: 'Banderas de configuración', lastUpdated: false }).trim()
 const banderas = parse(readFileSync(contentFile, 'utf-8')).sort((a, b) =>
   a.nombre.localeCompare(b.nombre, 'es'),
 )

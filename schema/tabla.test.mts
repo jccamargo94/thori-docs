@@ -12,8 +12,8 @@ const tablas = archivos.map((f) => ({
 }))
 
 describe('YAML de tablas', () => {
-  it('hay al menos una tabla', () => {
-    expect(archivos.length).toBeGreaterThan(0)
+  it('están las 43 tablas del manual', () => {
+    expect(archivos).toHaveLength(43)
   })
 
   it.each(tablas)('$archivo cumple el esquema', ({ datos }) => {
@@ -55,6 +55,24 @@ describe('YAML de tablas', () => {
       expect(texto, `${archivo} menciona DHOG`).not.toMatch(/DHOG/i)
       expect(texto, `${archivo} menciona RIGHTSIDE`).not.toMatch(/RIGHTSIDE/i)
     }
+  })
+})
+
+describe('unidades documentadas', () => {
+  const unidadesMd = readFileSync(
+    fileURLToPath(new URL('../docs/despacho-hidrotermico/referencia/unidades.md', import.meta.url)),
+    'utf-8',
+  )
+  const unidadesUsadas = [
+    ...new Set(
+      tablas.flatMap(({ datos }) => datos.campos.map((c: { unidad: string | null }) => c.unidad)),
+    ),
+  ].filter((u): u is string => u != null)
+
+  // Ata unidades.md a los YAML: si aparece una unidad nueva en un campo y nadie le
+  // agrega su sección, este test lo dice en vez de dejarlo pasar en silencio.
+  it.each(unidadesUsadas)('la unidad %s tiene su sección en unidades.md', (unidad) => {
+    expect(unidadesMd).toContain(`## ${unidad}`)
   })
 })
 

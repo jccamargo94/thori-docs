@@ -50,7 +50,7 @@ function paginaTabla(t) {
         '|---|---|---|---|---|',
         ...t.campos.map(filaCampo),
       ].join('\n')
-    : '_Esta tabla no tiene campos: el manual la declara pero indica que no está disponible en la versión actual del modelo._'
+    : '_Esta tabla no tiene campos: el manual la declara pero indica que no está disponible en la versión del modelo que documenta el manual._'
 
   return `---
 ${frontmatter}
