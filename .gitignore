@@ -8,3 +8,6 @@ docs/.vitepress/cache/
 # index.md es manual y sí se versiona.
 docs/despacho-hidrotermico/datos/*.md
 !docs/despacho-hidrotermico/datos/index.md
+
+# Página de banderas generada por scripts/generar-paginas-banderas.mjs desde content/banderas.yaml.
+docs/despacho-hidrotermico/referencia/banderas.md

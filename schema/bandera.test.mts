@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { parse } from 'yaml'
-import { BanderaSchema } from './bandera.mts'
+import { BanderaSchema, FAMILIAS } from './bandera.mts'
 
 const ruta = fileURLToPath(new URL('../content/banderas.yaml', import.meta.url))
 const banderas = parse(readFileSync(ruta, 'utf-8'))
@@ -19,6 +19,10 @@ describe('catálogo de banderas', () => {
   it('no hay nombres repetidos', () => {
     const nombres = banderas.map((b) => b.nombre)
     expect(new Set(nombres).size).toBe(nombres.length)
+  })
+
+  it('toda familia usada es una familia declarada', () => {
+    for (const b of banderas) expect(FAMILIAS).toContain(b.familia)
   })
 
   it('ningún texto menciona DHOG ni RIGHTSIDE', () => {
@@ -46,7 +50,7 @@ describe('el esquema rechaza datos inválidos', () => {
     ['estado fuera del enum', { ...valida, estado: 'revisado' }],
     ['sin valores', { ...valida, valores: [] }],
     ['descripción vacía', { ...valida, descripcion: '' }],
-    ['familia vacía', { ...valida, familia: '' }],
+    ['familia fuera del enum', { ...valida, familia: 'inventada' }],
     ['valor sin significado', { ...valida, valores: [{ valor: '0', significado: '' }] }],
   ])('rechaza: %s', (_caso, datos) => {
     expect(BanderaSchema.safeParse(datos).success).toBe(false)

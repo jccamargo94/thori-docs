@@ -229,9 +229,11 @@
 
 - nombre: GENERARLP
   descripcion: >
-    Es una opción de depuración: no cambia el resultado numérico de la ejecución,
-    pero deja un archivo con el planteamiento matemático completo del problema
-    (variables, restricciones y función objetivo) para inspeccionarlo o depurarlo.
+    Es una opción de depuración: el manual no lo afirma explícitamente, pero por
+    su naturaleza no debería cambiar el resultado numérico de la ejecución. Lo que
+    sí dice el manual es que deja un archivo con el planteamiento matemático
+    completo del problema (variables, restricciones y función objetivo) para
+    inspeccionarlo o depurarlo.
   familia: ejecucion
   estado: sin-verificar
   valores:
@@ -311,7 +313,10 @@
   estado: sin-verificar
   valores:
     - valor: "0"
-      significado: El mínimo de volumen útil del embalse se exige como restricción estricta.
+      significado: >
+        El manual no describe este valor explícitamente; por el patrón del resto
+        del catálogo se infiere que el mínimo de volumen útil se exige como
+        restricción estricta, sin penalización.
     - valor: "1"
       significado: >
         El incumplimiento del mínimo de volumen útil se penaliza en la función
@@ -327,7 +332,10 @@
   estado: sin-verificar
   valores:
     - valor: "0"
-      significado: El máximo de volumen útil del embalse se exige como restricción estricta.
+      significado: >
+        El manual no describe este valor explícitamente; por el patrón del resto
+        del catálogo se infiere que el máximo de volumen útil se exige como
+        restricción estricta, sin penalización.
     - valor: "1"
       significado: >
         El incumplimiento del máximo de volumen útil se penaliza en la función
@@ -342,7 +350,10 @@
   estado: sin-verificar
   valores:
     - valor: "0"
-      significado: Los vertimientos no se penalizan en la función objetivo.
+      significado: >
+        El manual no describe este valor explícitamente; por el patrón del resto
+        del catálogo se infiere que los vertimientos no se penalizan en la
+        función objetivo.
     - valor: "1"
       significado: Los vertimientos se penalizan en la función objetivo.
 
@@ -362,7 +373,12 @@
 - nombre: RGON
   descripcion: >
     Activa el modelado de unidades individuales en el despacho energético, en lugar
-    de tratar cada recurso como un bloque continuo de generación.
+    de tratar cada recurso como un bloque continuo de generación. El manual no
+    permite determinar con precisión el alcance de esta bandera: la única mención
+    relacionada con "unidades" en el resto del manual aparece en el contexto de un
+    recurso hidráulico (el campo mínimo de RECURSOHIDROBASICA), no de uno térmico,
+    así que su clasificación de familia aquí es una suposición y no un hecho
+    confirmado.
   familia: termica
   estado: sin-verificar
   valores:
