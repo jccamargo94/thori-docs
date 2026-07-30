@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest run",
+    "predocs:dev": "node scripts/generar-paginas-tablas.mjs",
     "docs:dev": "vitepress dev docs",
+    "predocs:build": "node scripts/generar-paginas-tablas.mjs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },

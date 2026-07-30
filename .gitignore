@@ -3,3 +3,8 @@ docs/.vitepress/dist/
 docs/.vitepress/cache/
 .DS_Store
 .superpowers/
+
+# Páginas de tabla generadas por scripts/generar-paginas-tablas.mjs desde content/tablas/*.yaml.
+# index.md es manual y sí se versiona.
+docs/despacho-hidrotermico/datos/*.md
+!docs/despacho-hidrotermico/datos/index.md
