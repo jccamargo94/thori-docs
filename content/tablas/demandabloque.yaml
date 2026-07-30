@@ -1,0 +1,36 @@
+id: demandabloque
+nombre: DemandaBloque
+familia: periodos
+titulo: Demanda por bloque
+descripcion: >
+  Demanda en potencia por bloque y por etapa, tomada de un modelo externo de
+  despacho estocástico (SDDP), que alimenta la demanda que el módulo usa por
+  bloque en cada escenario.
+estado: sin-verificar
+manual: "6.2"
+campos:
+  - nombre: periodo
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Etapa del horizonte de optimización.
+    referencia: periodobasica.nombre
+  - nombre: bloque
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Número del bloque de la demanda.
+    referencia: bloquebasica.nombre
+  - nombre: demanda
+    tipo: double
+    unidad: GWh-etapa
+    requerido: true
+    descripcion: Demanda en energía del bloque, tomada del modelo externo de despacho.
+    referencia: null
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Identificador del escenario a modelar; debe ser un número consecutivo.
+    referencia: null

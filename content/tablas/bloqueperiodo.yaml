@@ -1,0 +1,39 @@
+id: bloqueperiodo
+nombre: BloquePeriodo
+familia: bloques
+titulo: Bloques de demanda por etapa
+descripcion: >
+  Variante por etapa de los bloques de demanda: permite modelar bloques de
+  duración y de altura distintas en cada etapa de optimización, en lugar de
+  usar el mismo bloque para todo el horizonte.
+estado: sin-verificar
+manual: "3.2"
+campos:
+  - nombre: nombre
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Identificador numérico del bloque de demanda.
+    referencia: bloquebasica.nombre
+  - nombre: periodo
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Etapa del horizonte de optimización a la que aplica el bloque.
+    referencia: periodobasica.nombre
+  - nombre: factorduracion
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Factor en p.u. (0-1) que define el ancho del bloque respecto de la
+      duración de la etapa.
+    referencia: null
+  - nombre: factordemanda
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Factor en p.u. (0-1) que define el alto del bloque respecto de la
+      demanda máxima definida en periodobasica.
+    referencia: null

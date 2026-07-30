@@ -1,0 +1,86 @@
+id: empresabasica
+nombre: EmpresaBasica
+familia: empresas
+titulo: Empresas
+descripcion: >
+  Información básica de las empresas participantes: precios y cantidades de
+  sus contratos bilaterales, su asignación de cargo por confiabilidad y las
+  banderas que activan su participación en las restricciones de mercado. Los
+  valores de esta tabla no varían por etapa; la variante por etapa está en
+  empresaperiodo.
+estado: sin-verificar
+manual: "7.1"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre de la empresa.
+    referencia: null
+  - nombre: preciobolsa
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Precio de la generación asociada a la empresa que modela restricciones
+      de mercado; se multiplica en la función objetivo de maximización para
+      calcular los ingresos de la empresa en un problema de maximización de
+      beneficio.
+    referencia: null
+  - nombre: preciocontrato
+    tipo: double
+    unidad: $/MWh
+    requerido: true
+    descripcion: Valor del contrato bilateral que debe cumplir la empresa en cada etapa.
+    referencia: null
+  - nombre: oef
+    tipo: double
+    unidad: MWh
+    requerido: true
+    descripcion: Valor de la asignación de cargo por confiabilidad de la empresa.
+    referencia: null
+  - nombre: contrato
+    tipo: double
+    unidad: MWh
+    requerido: true
+    descripcion: Valor del contrato bilateral que debe cumplir la empresa.
+    referencia: null
+  - nombre: modelacournot
+    tipo: integer
+    unidad: null
+    requerido: false
+    descripcion: >
+      Bandera que define si la empresa participa en el modelo de competencia
+      de Cournot. Este modelo no está disponible en la versión 5.0.
+    referencia: null
+  - nombre: modelacontratos
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Bandera 1/0 para modelar la empresa dentro de las restricciones de mercado.
+    referencia: null
+  - nombre: factorcontrato
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Factor multiplicador entre 0 y 1 para el cumplimiento del valor de los
+      contratos bilaterales configurados en empresaperiodo.
+    referencia: null
+  - nombre: factorpenalizacioncontrato
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Factor multiplicador para penalizar el no cumplimiento de los contratos
+      bilaterales en la función objetivo; solo se tiene en cuenta en el
+      problema de maximización de utilidades y se multiplica por el precio de
+      bolsa.
+    referencia: null
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Identificador del escenario a modelar; debe ser un número consecutivo.
+    referencia: null

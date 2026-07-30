@@ -1,0 +1,47 @@
+id: areaperiodo
+nombre: AreaPeriodo
+familia: areas
+titulo: Áreas operativas por etapa
+descripcion: >
+  Información de las áreas operativas que puede variar de una etapa de
+  optimización a otra: demanda propia del área, bloque de demanda asociado y
+  límites de intercambio. Es la contraparte por etapa de areabasica.
+estado: sin-verificar
+manual: "2.2"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre o identificador del área operativa.
+    referencia: areabasica.nombre
+  - nombre: periodo
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Etapa de optimización a la que aplica el registro.
+    referencia: periodobasica.nombre
+  - nombre: bloque
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Bloque de demanda asociado, definido en bloquebasica.
+    referencia: bloquebasica.nombre
+  - nombre: demanda
+    tipo: double
+    unidad: MWh
+    requerido: true
+    descripcion: Demanda del área operativa en la etapa.
+    referencia: null
+  - nombre: limiteimportacion
+    tipo: double
+    unidad: MWh
+    requerido: true
+    descripcion: Límite máximo de importación de energía del área en la etapa.
+    referencia: null
+  - nombre: limiteexportacion
+    tipo: double
+    unidad: MWh
+    requerido: true
+    descripcion: Límite máximo de exportación de energía del área en la etapa.
+    referencia: null

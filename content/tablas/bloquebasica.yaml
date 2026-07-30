@@ -1,0 +1,33 @@
+id: bloquebasica
+nombre: BloqueBasica
+familia: bloques
+titulo: Bloques de demanda
+descripcion: >
+  Bloques en los que se divide la demanda dentro de cada etapa de
+  optimización, definidos como fracciones del ancho y del alto de la etapa.
+  El módulo no impone un límite al número de bloques que se pueden definir.
+estado: sin-verificar
+manual: "3.1"
+campos:
+  - nombre: nombre
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Identificador numérico del bloque de demanda.
+    referencia: null
+  - nombre: factorduracion
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Factor en p.u. (0-1) que define el ancho del bloque respecto de la
+      duración de la etapa a la que pertenece.
+    referencia: null
+  - nombre: factordemanda
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Factor en p.u. (0-1) que define el alto del bloque respecto de la
+      demanda máxima definida en periodobasica.
+    referencia: null

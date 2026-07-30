@@ -1,0 +1,30 @@
+id: horizonte
+nombre: Horizonte
+familia: periodos
+titulo: Horizonte de optimización
+descripcion: >
+  Etapa inicial y final del horizonte de optimización de la corrida, junto con
+  una descripción informativa del caso que sirve para identificarla.
+estado: sin-verificar
+manual: "6.3"
+campos:
+  - nombre: etapainicial
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Etapa inicial del horizonte de optimización.
+    referencia: periodobasica.nombre
+  - nombre: etapafinal
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Etapa final del horizonte de optimización.
+    referencia: periodobasica.nombre
+  - nombre: descripcion
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Descripción del caso para identificar la corrida. El campo es solo
+      informativo: no se usa en la formulación matemática del modelo.
+    referencia: null

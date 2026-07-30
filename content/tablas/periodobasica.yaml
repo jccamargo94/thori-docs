@@ -1,0 +1,96 @@
+id: periodobasica
+nombre: PeriodoBasica
+familia: periodos
+titulo: Periodos de optimización
+descripcion: >
+  Información propia de cada etapa (periodo) del horizonte de optimización:
+  fecha, duración, demanda base del sistema y parámetros económicos que
+  aplican a toda la etapa, como el costo de racionamiento o la tasa de
+  descuento.
+estado: sin-verificar
+manual: "6.1"
+campos:
+  - nombre: fecha
+    tipo: date
+    unidad: null
+    requerido: true
+    descripcion: Fecha calendario asociada a la etapa de optimización.
+    referencia: null
+  - nombre: nombre
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Identificador de la etapa o periodo de optimización.
+    referencia: null
+  - nombre: demanda
+    tipo: double
+    unidad: MWh
+    requerido: true
+    descripcion: >
+      Demanda del sistema en la etapa. Es el valor base para construir los
+      bloques de demanda según el factor definido en bloquebasica o
+      bloqueperiodo.
+    referencia: null
+  - nombre: duracionhoras
+    tipo: integer
+    unidad: horas
+    requerido: true
+    descripcion: Duración de la etapa de optimización.
+    referencia: null
+  - nombre: reservaagc
+    tipo: double
+    unidad: MWh
+    requerido: true
+    descripcion: >
+      Holgura de AGC de todo el sistema en la etapa; se asigna entre los
+      recursos de generación hidráulicos según su porcentaje de AGC.
+    referencia: null
+  - nombre: costoracionamiento
+    tipo: double
+    unidad: $/MWh
+    requerido: true
+    descripcion: Costo del racionamiento de energía en la etapa.
+    referencia: null
+  - nombre: car
+    tipo: double
+    unidad: "%"
+    requerido: true
+    descripcion: >
+      Valor, entre 0 y 100, de la curva de aversión al riesgo de todo el
+      sistema para la etapa.
+    referencia: null
+  - nombre: demandainternacional
+    tipo: double
+    unidad: MWh
+    requerido: true
+    descripcion: >
+      Demanda internacional en la etapa, usada para tener en cuenta
+      exportaciones de energía a otros países.
+    referencia: null
+  - nombre: tasadescuento
+    tipo: double
+    unidad: "%"
+    requerido: true
+    descripcion: >
+      Tasa de descuento por etapa usada para traer los costos variables a
+      valor presente neto.
+    referencia: null
+  - nombre: cere
+    tipo: double
+    unidad: $/MWh
+    requerido: true
+    descripcion: Costo Equivalente Real en Energía de la etapa.
+    referencia: null
+  - nombre: precioescasez
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: Precio de escasez de activación para cumplimiento de la OEF.
+    referencia: null
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Identificador del escenario a modelar; debe ser un número consecutivo.
+    referencia: null

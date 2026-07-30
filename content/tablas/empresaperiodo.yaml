@@ -1,0 +1,57 @@
+id: empresaperiodo
+nombre: EmpresaPeriodo
+familia: empresas
+titulo: Empresas por etapa
+descripcion: >
+  Información de las empresas que puede variar por etapa: precios y
+  cantidades de sus contratos bilaterales y su asignación de cargo por
+  confiabilidad en la etapa. Es la contraparte por etapa de empresabasica.
+estado: sin-verificar
+manual: "7.2"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre de la empresa.
+    referencia: empresabasica.nombre
+  - nombre: periodo
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: Etapa del horizonte de optimización.
+    referencia: periodobasica.nombre
+  - nombre: preciobolsa
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Precio de la generación asociada a la empresa que modela restricciones
+      de mercado; se multiplica en la función objetivo de maximización para
+      calcular los ingresos de la empresa.
+    referencia: null
+  - nombre: preciocontrato
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: Valor del contrato bilateral que debe cumplir la empresa en la etapa.
+    referencia: null
+  - nombre: oef
+    tipo: double
+    unidad: MWh
+    requerido: true
+    descripcion: Valor de la asignación de cargo por confiabilidad de la empresa.
+    referencia: null
+  - nombre: contrato
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: Valor del contrato bilateral que debe cumplir la empresa.
+    referencia: null
+  - nombre: escenario
+    tipo: integer
+    unidad: null
+    requerido: true
+    descripcion: >
+      Identificador del escenario a modelar; debe ser un número consecutivo.
+    referencia: null

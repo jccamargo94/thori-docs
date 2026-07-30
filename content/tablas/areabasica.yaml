@@ -1,0 +1,37 @@
+id: areabasica
+nombre: AreaBasica
+familia: areas
+titulo: Áreas operativas
+descripcion: >
+  Áreas operativas en las que se divide el sistema, con sus límites de
+  intercambio de energía con el resto del sistema. Los valores de esta tabla
+  no varían por etapa; la variante por etapa está en areaperiodo.
+estado: sin-verificar
+manual: "2.1"
+campos:
+  - nombre: nombre
+    tipo: string
+    unidad: null
+    requerido: true
+    descripcion: Nombre o identificador del área operativa.
+    referencia: null
+  - nombre: factordemanda
+    tipo: double
+    unidad: null
+    requerido: true
+    descripcion: >
+      Factor entre 0 y 1 que se usa para calcular la demanda del área como una
+      fracción de la demanda total del sistema, definida en periodobasica.
+    referencia: null
+  - nombre: limiteimportacion
+    tipo: double
+    unidad: MWh
+    requerido: true
+    descripcion: Límite máximo de importación de energía del área.
+    referencia: null
+  - nombre: limiteexportacion
+    tipo: double
+    unidad: MWh
+    requerido: true
+    descripcion: Límite máximo de exportación de energía del área.
+    referencia: null

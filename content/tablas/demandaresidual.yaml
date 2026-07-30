@@ -1,0 +1,22 @@
+id: demandaresidual
+nombre: DemandaResidual
+familia: empresas
+titulo: Demanda residual (modelo de Cournot)
+descripcion: >
+  Tabla reservada para el modelo de competencia de Cournot entre empresas. El
+  manual de referencia solo declara el nombre de la tabla: indica de forma
+  explícita que no está disponible en la versión 5.0 del modelo y no define
+  ningún campo para ella.
+estado: sin-verificar
+manual: "7.3"
+campos:
+  - nombre: descripcion
+    tipo: string
+    unidad: null
+    requerido: false
+    descripcion: >
+      Campo placeholder, sin respaldo en el manual: la sección 7.3 no declara
+      ningún campo porque la tabla "no está disponible en la versión 5.0" del
+      modelo de Cournot. Se deja este único campo para satisfacer el esquema
+      de datos, que exige al menos un campo por tabla.
+    referencia: null
