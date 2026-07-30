@@ -21,6 +21,8 @@ const familias = computed(() => {
 El caso que se simula se describe con {{ tablas.length }} tablas. Están agrupadas por
 familia; cada tabla documenta sus campos, su tipo y su unidad.
 
+<ExploradorTablas />
+
 <div v-for="[familia, items] in familias" :key="familia">
   <h2>{{ familia }}</h2>
   <ul>
