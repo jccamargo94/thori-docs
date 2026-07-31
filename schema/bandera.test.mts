@@ -104,14 +104,19 @@ describe('archivos exigidos por cada bandera', () => {
     const fc = banderas.find((b) => b.nombre === 'FCVARIABLE')
     expect(fc.archivos).toContainEqual({
       tabla: 'ecuacionesfc',
-      fuente: 'modelo',
+      fuente: 'validador',
       valores: ['3'],
     })
   })
 
-  it('ZONAS declara las dos tablas que solo el modelo exige', () => {
-    const zonas = banderas.find((b) => b.nombre === 'ZONAS')
-    const soloModelo = zonas.archivos.filter((a) => a.fuente === 'modelo').map((a) => a.tabla)
-    expect(soloModelo.sort()).toEqual(['zonaespecial', 'zonarecurso'])
+  // El validador de insumos pasó a exigir por pareja (bandera, valor), así que ya
+  // no queda ninguna tabla que el modelo necesite y el validador no reclame. Si
+  // alguna vuelve a aparecer, este test falla y hay que documentar el hueco de
+  // nuevo con `fuente: modelo` en vez de borrarlo en silencio.
+  it('ninguna tabla queda exigida solo por el modelo', () => {
+    const soloModelo = banderas.flatMap((b) =>
+      (b.archivos ?? []).filter((a) => a.fuente === 'modelo').map((a) => `${b.nombre}/${a.tabla}`),
+    )
+    expect(soloModelo.sort()).toEqual([])
   })
 })

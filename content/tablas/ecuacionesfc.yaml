@@ -19,11 +19,6 @@ descripcion: >
   el código da los nombres de columna y la restricción que alimentan, no las
   unidades de cada coeficiente.
 
-
-  Advertencia sobre la carga: hoy el validador de insumos no exige este archivo
-  aunque la bandera esté activa. Un caso con FCVARIABLE en 3 y sin esta tabla
-  pasa la validación y falla más tarde, al resolver. Ver el issue
-  621 del repositorio de la plataforma.
 estado: difiere-v6
 manual: "8.4"
 campos:
