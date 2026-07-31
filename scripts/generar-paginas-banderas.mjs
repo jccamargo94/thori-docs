@@ -93,6 +93,32 @@ dos ejecuciones con los mismos datos y distintas banderas dan resultados distint
 
 Los nombres están fijados en el código del modelo y no se pueden modificar.
 
+## De la bandera a la restricción
+
+Activar una bandera con cierto valor no solo exige un archivo: ese archivo alimenta
+una restricción concreta del modelo de optimización. Estos tres ejemplos muestran el
+patrón completo, de punta a punta:
+
+\`\`\`mermaid
+flowchart LR
+  subgraph FC3 ["FCVARIABLE = 3"]
+    F3["FCVARIABLE = 3"] --> T3["ecuacionesFC"] --> C3["r59_ProduccionHidro3<br/>produccion como funcion lineal<br/>de volumen y turbinamiento"]
+  end
+
+  subgraph FT1 ["FTVARIABLE = 1"]
+    F1["FTVARIABLE = 1"] --> T1["recursoTermicoVariable"] --> C1["r27_ProduccionTermicoFT<br/>produccion termica con<br/>factor de consumo variable"]
+  end
+
+  subgraph Z1 ["ZONAS = 1"]
+    FZ["ZONAS = 1"] --> TZ["zonaBasica / zonaEspecial<br/>zonaPeriodo / zonaRecurso"] --> CZ["r14_ZonaMinimo<br/>r15_ZonaMaximo<br/>limites por zona de seguridad"]
+  end
+\`\`\`
+
+El primer caso (\`FCVARIABLE = 3\`) muestra que la clave real es la pareja
+bandera-valor, no solo la bandera: \`FCVARIABLE\` en \`1\` o \`2\` exige otras tablas y
+alimenta otras restricciones. El tercero (\`ZONAS = 1\`) muestra que una sola bandera
+puede exigir varias tablas a la vez y alimentar varias restricciones a la vez.
+
 ${banderas.map(seccionBandera).join('\n')}`
 
 writeFileSync(outFile, contenido)
