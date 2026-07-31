@@ -128,7 +128,7 @@
     - valor: "2"
       significado: Se toma la demanda en bloques de energía provista por un programa externo.
   archivos:
-    - { tabla: demandabloque, fuente: modelo, valores: ["2"] }
+    - { tabla: demandabloque, fuente: validador, valores: ["2"] }
 
 - nombre: DH
   descripcion: >
@@ -185,8 +185,8 @@
         Se usa una ecuación del factor de conversión en función del nivel del embalse,
         con intercepto, término lineal y término cuadrático, definida en ecuacionesFC.
   archivos:
-    - { tabla: recursohidrovariable, fuente: modelo, valores: ["1", "2"] }
-    - { tabla: ecuacionesfc, fuente: modelo, valores: ["3"] }
+    - { tabla: recursohidrovariable, fuente: validador, valores: ["1", "2"] }
+    - { tabla: ecuacionesfc, fuente: validador, valores: ["3"] }
 
 - nombre: FTVARIABLE
   descripcion: >
@@ -475,5 +475,5 @@
   archivos:
     - { tabla: zonabasica, fuente: validador }
     - { tabla: zonaperiodo, fuente: validador }
-    - { tabla: zonaespecial, fuente: modelo }
-    - { tabla: zonarecurso, fuente: modelo }
+    - { tabla: zonaespecial, fuente: validador }
+    - { tabla: zonarecurso, fuente: validador }
